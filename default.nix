@@ -19,8 +19,8 @@ let
 # Packages available in the nix shell
 #------------------------------------------------------------------------------
 
-    shellPkgs =
-      with shell;
+    haskellLibDeps =
+      with hpkgs;
         [ # Streamly packages
           fusion-plugin
           streamly-core
@@ -39,6 +39,12 @@ let
           tasty-bench
         ];
 
+    otherPackages =
+      with hpkgs;
+        [
+          haskell-language-server
+        ];
+
 #------------------------------------------------------------------------------
 # Generic stuff
 #------------------------------------------------------------------------------
@@ -49,7 +55,7 @@ let
           inherit compiler;
         };
 
-    shell =
+    hpkgs =
       haskellPackages.override (old: {
         overrides =
           nixpkgs.lib.composeExtensions
@@ -62,16 +68,16 @@ let
       });
 
     # A fake package to add some additional deps to the shell env
-    additionalDeps = shell.mkDerivation rec {
+    additionalDeps = hpkgs.mkDerivation rec {
               version = "0.1";
               pname   = "streamly-additional";
               license = "BSD-3-Clause";
 
-              libraryHaskellDepends = shellPkgs;
-              setupHaskellDepends = with shell; [
+              libraryHaskellDepends = haskellLibDeps;
+              setupHaskellDepends = with hpkgs; [
                 cabal-doctest
               ];
-              executableFrameworkDepends = with shell;
+              executableFrameworkDepends = with hpkgs;
                 # XXX On macOS cabal2nix does not seem to generate a
                 # dependency on Cocoa framework.
                 if builtins.currentSystem == "x86_64-darwin"
@@ -84,5 +90,5 @@ let
         { inherit nixpkgs; };
 
 in if nixpkgs.lib.inNixShell
-   then utils.mkShell shell (p: [additionalDeps]) true
+   then utils.mkShell hpkgs (p: [additionalDeps]) otherPackages true
    else abort "nix-shell only please!"

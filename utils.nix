@@ -46,7 +46,7 @@ let
     github = super: pkg: rev:
       git super pkg "git@github.com:${pkg}.git" rev;
 
-    mkShell = shellDrv: pkgs: doBench: shellDrv.shellFor {
+    mkShell = shellDrv: pkgs: otherPkgs: doBench: shellDrv.shellFor {
         packages = pkgs;
         # some dependencies of hoogle fail to build with quickcheck-2.14
         # We should use hoogle as external tool instead of building it here
@@ -55,9 +55,10 @@ let
         # XXX On macOS cabal2nix does not seem to generate a dependency on
         # Cocoa framework.
         buildInputs =
-            if builtins.currentSystem == "x86_64-darwin"
+            otherPkgs ++
+            (if builtins.currentSystem == "x86_64-darwin"
             then [nixpkgs.darwin.apple_sdk.frameworks.Cocoa]
-            else [];
+            else []);
         # Use a better prompt
         shellHook = ''
           export CABAL_DIR="$(pwd)/.cabal.nix"
