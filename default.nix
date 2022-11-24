@@ -41,10 +41,16 @@ let
 
     vimCfg = import nix/vim/vim.nix {nixpkgs = nixpkgs;};
     otherPackages =
-      with hpkgs;
         [
-          haskell-language-server
+          nixpkgs.pkgs.par                     # paragraph formatting for vim
+          nixpkgs.pkgs.powerline-fonts # for git prompt, vim status line, make it a dep.
           vimCfg.nvimCustom
+
+          nixpkgs.pkgs.cabal-install
+          nixpkgs.pkgs.hlint
+          nixpkgs.haskellPackages.fourmolu
+          nixpkgs.pkgs.ghcid
+          hpkgs.haskell-language-server
         ];
 
 #------------------------------------------------------------------------------
