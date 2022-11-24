@@ -50,7 +50,7 @@ let
 #------------------------------------------------------------------------------
 
     haskellPackages =
-      (import ./haskellPackages.nix)
+      (import ./nix/haskellPackages.nix)
         { inherit nixpkgs;
           inherit compiler;
         };
@@ -86,7 +86,7 @@ let
             };
 
     utils =
-      (import ./utils.nix)
+      (import ./nix/utils.nix)
         { inherit nixpkgs; };
 
 in if nixpkgs.lib.inNixShell
