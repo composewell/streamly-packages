@@ -39,10 +39,12 @@ let
           tasty-bench
         ];
 
+    vimCfg = import nix/vim/vim.nix {nixpkgs = nixpkgs;};
     otherPackages =
       with hpkgs;
         [
           haskell-language-server
+          vimCfg.nvimCustom
         ];
 
 #------------------------------------------------------------------------------

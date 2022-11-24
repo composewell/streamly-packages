@@ -1,0 +1,316 @@
+" General {{{
+" default is \
+"let maplocalleader = '\'
+
+" default to mouse mode off, it is more convenient to copy paste using mouse
+" when mouse mode is off.
+" set mouse=
+
+set textwidth=79
+set softtabstop=4
+"set tabstop=4
+"set shiftwidth=4
+
+set splitright
+let NERDTreeQuitOnOpen = 0
+
+"vimdiff: unfold everything in both windows
+nmap ,zR zR:wincmd W<CR>zR:wincmd W<CR>
+" }}}
+" Plugins {{{
+"augroup load_on_insert
+"  autocmd!
+"  autocmd InsertEnter * call plug#load('YouCompleteMe')
+"                     \| autocmd! load_on_insert
+"augroup END
+" }}}
+" Appearance {{{
+" Fix redraw issue on scrolling when in tmux.
+" See https://sunaku.github.io/vim-256color-bce.html
+if &term =~ '256color'
+    set t_ut=
+endif
+
+" Set color column before the color scheme for the scheme color to take effect.
+hi ColorColumn ctermbg=8
+set colorcolumn=80
+
+" makes it easy to preview a tag in tagbar
+set cursorline
+
+" Solarized does not worl well on all terminals unless the terminal is setup
+" for solarized colors. So we use wombat256mod which is the default.
+"if &diff
+"  " When using vimdiff use default wombat scheme instead of solarized
+"  " Solarized does not highlight diffs well, sometimes diffs get masked
+"else
+"  " Uncomment 'altercation/vim-colors-solarized' in plugins.vim
+"  try
+"    colorscheme solarized
+"    set background=dark
+"    call togglebg#map("<F2>")
+"  catch
+"  endtry
+"endif
+
+" haskell-vim plugin's auto indent is irritating
+let g:haskell_indent_disable = 1
+
+" }}}
+" Indentation {{{
+let g:indent_guides_enable_on_vim_startup = 1
+let indent_guides_guide_size = 0
+
+" reset guides on shiftwidth change
+" needs vim >= 7.4.786
+autocmd OptionSet * call indent_guides#process_autocmds()
+
+" reset indent guides e.g. after changing shiftwidth
+nmap <Leader>ir :IndentGuidesToggle<CR>:IndentGuidesToggle<CR>
+"let g:indent_guides_auto_colors = 0
+
+" See color values at https://github.com/altercation/vim-colors-solarized
+" Override the indent guide highlight function
+" to use colorscheme specific indentguide colors
+"function! indent_guides#basic_highlight_colors()
+"  try
+"      let l:colorscheme=g:colors_name
+"  catch /^Vim:E121/
+"      let l:colorscheme='default'
+"  endtry
+"  let l:cterm_colors = (&g:background == 'dark')
+"                        \ ? ((l:colorscheme == 'solarized')
+"                            \ ? ['black', 8]
+"                            \ : ((l:colorscheme == 'wombat256mod') ? [236, 235] : ['darkgrey', 'black']))
+"                        \ : ((l:colorscheme == 'wombat256mod') ? [236, 235] : ['lightgrey', 'white'])
+"  let l:gui_colors   = (&g:background == 'dark') ? ['grey15', 'grey30']  : ['grey70', 'grey85']
+"
+"  exe 'hi IndentGuidesEven guibg=' . l:gui_colors[0] . ' guifg=' . l:gui_colors[1] . ' ctermbg=' . l:cterm_colors[0] . ' ctermfg=' . l:cterm_colors[1]
+"  exe 'hi IndentGuidesOdd  guibg=' . l:gui_colors[1] . ' guifg=' . l:gui_colors[0] . ' ctermbg=' . l:cterm_colors[1] . ' ctermfg=' . l:cterm_colors[0]
+"endfunction
+" }}}
+" Editing {{{
+set virtualedit=all
+" }}}
+" Snippets {{{
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-x>"
+let g:UltiSnipsExpandTrigger="<c-y>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"
+" If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
+
+" emmet plugin currentl disabled
+"let g:user_emmet_install_global = 0
+"autocmd FileType html,css EmmetInstall
+
+" }}}
+" Tags & Cscope {{{
+" Open tagbar automatically
+" autocmd VimEnter * nested :call tagbar#autoopen(1)
+"let g:tagbar_left = 1
+
+set tags+=codex.tags;/
+set cscopeprg=hscope
+set cscopetag
+set cscopetagorder=1 " search tags first
+
+function! CsAddHscope()
+  let db = findfile("hscope.out", ".;")
+  if (!empty(db))
+    let path = strpart(db, 0, match(db, "/hscope.out$"))
+    set nocscopeverbose " suppress 'duplicate connection' error
+    exe "cs add " . db . " " . path
+    set cscopeverbose
+  endif
+endfunction
+au BufEnter /*.hs call CsAddHscope()
+
+" Generate tags and hscope db
+map <leader>tg :!codex update --force<CR>:call system("git-hscope")<CR><CR>:call CsAddHscope()<CR>
+
+nmap <silent> ,\ :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> ,/ :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> ,. :cs find g <C-R>=expand("<cword>")<CR><CR>
+" }}}
+" Language Server {{{
+"------------------------------------------------------------------------------
+" CoC
+"------------------------------------------------------------------------------
+"set signcolumn=number
+set signcolumn=yes
+set updatetime=300
+set cmdheight=2
+
+" Completions
+" Use tab to trigger completion with characters ahead and navigate.
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Compilation errors/diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Goto
+nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
+
+" Show references of the symbol under cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+"Documentation
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Refactor
+" Add `:OR` command for organizing imports of the current buffer.
+" It does not work. Anyway, we can use the formatter to do it.
+"command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+
+" Formatting selected code.
+xmap <leader>gf  <Plug>(coc-format-selected)
+nmap <leader>gf  <Plug>(coc-format-selected)
+
+"------------------------------------------------------------------------------
+" CoC Wingman
+"------------------------------------------------------------------------------
+
+function! s:JumpToNextHole()
+  call CocActionAsync('diagnosticNext', 'hint')
+endfunction
+
+function! s:GotoNextHole()
+  " wait for the hole diagnostics to reload
+  sleep 500m
+  " and then jump to the next hole
+  normal 0
+  call <SID>JumpToNextHole()
+endfunction
+
+function! s:WingmanRefine(type)
+  call CocAction('codeAction', a:type, ['refactor.wingman.refine'])
+  call <SID>GotoNextHole()
+endfunction
+
+function! s:WingmanDestruct(type)
+  call CocAction('codeAction', a:type, ['refactor.wingman.caseSplit'])
+  call <SID>GotoNextHole()
+endfunction
+
+function! s:WingmanDestructAll(type)
+  call CocAction('codeAction', a:type, ['refactor.wingman.splitFuncArgs'])
+  call <SID>GotoNextHole()
+endfunction
+
+function! s:WingmanFillHole(type)
+  call CocAction('codeAction', a:type, ['refactor.wingman.fillHole'])
+  call <SID>GotoNextHole()
+endfunction
+
+function! s:WingmanUseCtor(type)
+  call CocAction('codeAction', a:type, ['refactor.wingman.useConstructor'])
+  call <SID>GotoNextHole()
+endfunction
+
+" use [h and ]h to navigate between holes
+nnoremap <silent> [h :<C-U>call CocActionAsync('diagnosticPrevious', 'hint')<CR>
+nnoremap <silent> ]h :<C-U>call <SID>JumpToNextHole()<CR>
+
+" <leader>d to perform a pattern match, <leader>n to fill a hole
+nnoremap <silent> <leader>d :<C-u>set operatorfunc=<SID>WingmanDestruct<CR>g@l
+nnoremap <silent> <leader>a :<C-u>set operatorfunc=<SID>WingmanDestructAll<CR>g@l
+nnoremap <silent> <leader>n :<C-u>set operatorfunc=<SID>WingmanFillHole<CR>g@l
+nnoremap <silent> <leader>i :<C-u>set operatorfunc=<SID>WingmanRefine<CR>g@l
+nnoremap <silent> <leader>c :<C-u>set operatorfunc=<SID>WingmanUseCtor<CR>g@l
+
+" }}}
+" Web development {{{
+
+" Javascript completion
+" make it portable - need to have the path in vimpath
+"let g:tern#command=['/opt/local/bin/tern']
+"let g:tern_map_keys=1
+"autocmd FileType javascript setlocal omnifunc=tern#Complete
+
+" Formatting
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+
+" }}}
+" Haskell {{{
+" For hasktags use . as part of the keyword
+" Modules have . as part of the keyword e.g. Data.List
+" But qualified imports will not work e.g. Map.elem will not search elem
+autocmd FileType haskell set iskeyword=a-z,A-Z,_,.,39,<,>,*,$,#
+autocmd FileType haskell set formatoptions+=tcro
+autocmd FileType haskell set formatoptions-=l
+autocmd FileType haskell set ts=4
+autocmd FileType haskell set sw=4
+
+" XXX with hindent or stylish-haskell we lose the ability to format comments.
+" Currently I just reset the formatprg variable before formatting comments.
+" Use globally instead of the default local setting
+"autocmd FileType haskell let &formatprg="hindent --style johan-tibell --line-length 79 --indent-size 4 --sort-imports -XQuasiQuotes"
+"autocmd FileType haskell let &formatprg="stylish-haskell"
+autocmd FileType haskell set formatprg=
+nnoremap ,fmt :let &formatprg="hindent --style johan-tibell --line-length 79 --indent-size 4 --sort-imports -XQuasiQuotes"<CR>
+nnoremap ,tmf :set formatprg=<CR>
+
+" Disable concealplus
+"autocmd FileType haskell set conceallevel=0
+
+" TODO - ghci on the current file
+" TODO - ghci with only the imports of current file's
+nnoremap ,gh :vsplit term://cabal repl<CR>
+" How to do this with nvim terminal?
+"nnoremap ,ghl :call conque_term#get_instance().writeln(':load '.expand('%'))<CR>
+
+"For neco-ghc to work with YCM
+" This makes vim hang for a while when a . is inserted. Disabling for now.
+"let g:ycm_semantic_triggers = {'haskell' : ['.']}
+
+" }}}
+" Python {{{
+"let g:pymode_rope_completion = 0
+" }}}
+" Markdown {{{
+"markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+
+" }}}
