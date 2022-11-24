@@ -27,7 +27,7 @@ let
                   then [nixpkgs.darwin.apple_sdk.frameworks.Cocoa]
                   else [];
                 enableLibraryProfiling = false;
-                doHaddock = false;
+                #doHaddock = false;
                 doCheck = false;
                 configureFlags = flags;
               });
@@ -50,7 +50,7 @@ let
         packages = pkgs;
         # some dependencies of hoogle fail to build with quickcheck-2.14
         # We should use hoogle as external tool instead of building it here
-        # withHoogle = true;
+        withHoogle = true;
         doBenchmark = doBench;
         # XXX On macOS cabal2nix does not seem to generate a dependency on
         # Cocoa framework.
