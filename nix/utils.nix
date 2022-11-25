@@ -46,11 +46,11 @@ let
     github = super: pkg: rev:
       git super pkg "git@github.com:${pkg}.git" rev;
 
-    mkShell = shellDrv: pkgs: otherPkgs: doBench: shellDrv.shellFor {
+    mkShell = shellDrv: pkgs: otherPkgs: doDocs: doBench: shellDrv.shellFor {
         packages = pkgs;
         # some dependencies of hoogle fail to build with quickcheck-2.14
         # We should use hoogle as external tool instead of building it here
-        withHoogle = true;
+        withHoogle = doDocs;
         doBenchmark = doBench;
         # XXX On macOS cabal2nix does not seem to generate a dependency on
         # Cocoa framework.

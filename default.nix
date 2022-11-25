@@ -10,8 +10,10 @@
   nixpkgs ?
     import (builtins.fetchTarball
       https://github.com/NixOS/nixpkgs/archive/refs/tags/22.05.tar.gz)
-        {}
+        {config.allowUnfree = true;}
 , compiler ? "ghc922"
+, vscode ? true
+, docs ? true
 }:
 let
 
@@ -51,7 +53,7 @@ let
           nixpkgs.haskellPackages.fourmolu
           nixpkgs.pkgs.ghcid
           hpkgs.haskell-language-server
-        ];
+        ] ++ (if vscode then [ nixpkgs.pkgs.vscode-with-extensions ] else []) ;
 
 #------------------------------------------------------------------------------
 # Generic stuff
@@ -98,5 +100,5 @@ let
         { inherit nixpkgs; };
 
 in if nixpkgs.lib.inNixShell
-   then utils.mkShell hpkgs (p: [additionalDeps]) otherPackages true
+   then utils.mkShell hpkgs (p: [additionalDeps]) otherPackages docs true
    else abort "nix-shell only please!"
