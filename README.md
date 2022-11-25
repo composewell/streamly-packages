@@ -16,9 +16,10 @@ https://github.com/NixOS/nixpkgs/archive/refs/tags/22.05.tar.gz .
 Start a nix shell, and use the ghc, cabal, nvim commands for Haskell dev:
 
 ```
-$ nix-shell
-$ ghc --version
+$ nix-shell https://github.com/composewell/streamly-packages/archive/master.tar.gz
 ```
+
+You can also clone the repo and run `nix-shell` from the root of repo.
 
 # Accessing the documentation
 
