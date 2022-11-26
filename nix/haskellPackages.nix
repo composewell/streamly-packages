@@ -10,6 +10,14 @@ let
         then nixpkgs.haskellPackages
         else nixpkgs.haskell.packages.${compiler};
 
+    recompile = pkg:
+        pkg.overrideAttrs (oldAttrs:
+          { doCheck = false;
+            #doHaddock = false;
+            configureFlags =
+              oldAttrs.configureFlags ++ ["--disable-tests"];
+          });
+
     overriddenHaskellPackages =
         haskellPackages.override {
             overrides = self: super:
@@ -74,6 +82,15 @@ let
                           ver = "0.1.3.0";
                           sha256 = "sha256-eTGKg87Ii8ySZzL2kbMjkCrUTZm4CFpvU67MkjfMesk=";
                         } {};
+
+                    # test fails
+                    http2 = recompile super.http2 ;
+                    # test listens on some port
+                    streaming-commons = recompile super.streaming-commons ;
+                    # test listens on some port
+                    http-client = recompile super.http-client;
+                    # tests take too much time
+                    ListLike = recompile super.ListLike;
                 };
         };
 in overriddenHaskellPackages

@@ -1,37 +1,60 @@
-# What is this?
+# Streamly Development Shell
 
-Nix shell based complete development environment for streamly ecosystem. It
-includes:
+Nix shell based development environment for Haskell Streamly
+ecosystem. Includes the following:
 
-* Streamly ecosystem packages and their dependencies, along with
-  haddock documentation.
-* Haskell compiler `ghc` 9.2.2 and the haskell language server.
-* `nvim` editor with all the necessary plugins for haskell development.
+* Haskell compiler `ghc`
+* Haskell project build tool `cabal`
+* Streamly ecosystem libraries
+* Hoogle server for documentation
+* Haskell language server (HLS)
+* A few other Haskell dev tools
+* Vi editor `nvim`
+* Visual Studio Code editor `code`
 
-The nix version used is
-https://github.com/NixOS/nixpkgs/archive/refs/tags/22.05.tar.gz .
+Check the `nixpkgs` version in `default.nix`.
 
 # How to use it?
 
-Start a nix shell, and use the ghc, cabal, nvim commands for Haskell dev:
+Run nix-shell, and use ghc, cabal from the PATH:
 
 ```
 $ nix-shell https://github.com/composewell/streamly-packages/archive/master.tar.gz
 ```
 
-You can also clone the repo and run `nix-shell` from the root of repo.
+You can also clone the repo and run `nix-shell` from the repo root directory.
+
+By default - only ghc, cabal and streamly packages are installed. You
+can use the following arguments to nix-shell to customize install:
+
+* editors true
+* haskell-tools true
+* hoogle true
+* all true
+
+For example,
+
+```
+$ nix-shell --arg editors true --arg haskell-tools true ...
+```
 
 # Accessing the documentation
 
-After starting the nix shell run the following command:
+Inside the nix shell, run the following command:
 
 ```
 $ hoogle server --local -p 8080
 ```
 
-And then access the URL `http://127.0.0.1:8080`.
+Open the URL `http://127.0.0.1:8080` in your browser.
 
-# Using the language server with nvim
+# Using vim editor
+
+Inside the nix shell, run the following command:
+
+```
+$ nvim
+```
 
 Add the following to your `$HOME/.config/nvim/coc-settings.json` to use the
 haskell language server with nvim:
@@ -48,3 +71,25 @@ haskell language server with nvim:
   }
 }
 ```
+
+# Using VSCode editor
+
+To run VSCodium, the open source version of Microsoft VSCode, run the
+following command in the nix-shell:
+
+```
+$ codium
+```
+
+If you get a pop up saying: "How do you want the extension to
+manage/discover HLS and the relevant toolchain?" Choose, "Manually
+via PATH" if you have built the nix derivation with `haskell-tools`
+included. You can also set it in the following section in settings:
+  * Extensions
+    * Haskell
+      * Manage HLS
+        * PATH
+
+You can also use your existing installation of VSCode, just make sure to
+run it from the nix-shell so that the language server is able to see the
+installed libraries.

@@ -3,18 +3,26 @@
 
 # CAUTION! a spelling mistake in arg string is ignored silently.
 #
-# To use ghc-8.10.7
-# nix-shell --argstr compiler "ghc8107"
+# To use a specific ghc version:
+# nix-shell --argstr compiler "ghc922"
+# nix-shell --arg editors true --arg hoogle true
 
 {
   nixpkgs ?
     import (builtins.fetchTarball
-      https://github.com/NixOS/nixpkgs/archive/refs/tags/22.05.tar.gz)
-        {config.allowUnfree = true;}
-, compiler ? "ghc922"
-, vscode ? true
-, docs ? true
+      #https://github.com/NixOS/nixpkgs/archive/refs/tags/22.05.tar.gz)
+      # 23.05-pre
+      https://github.com/NixOS/nixpkgs/archive/b68bd2e.tar.gz)
+      # Unfree for some vscode extensions
+        { config.allowUnfree = true;
+        }
+, compiler ? "ghc943"
+, editors ? false
+, haskell-tools ? false
+, hoogle ? false
+, all ? false
 }:
+
 let
 
 #------------------------------------------------------------------------------
@@ -42,18 +50,51 @@ let
         ];
 
     vimCfg = import nix/vim/vim.nix {nixpkgs = nixpkgs;};
-    otherPackages =
-        [
-          nixpkgs.pkgs.par                     # paragraph formatting for vim
-          nixpkgs.pkgs.powerline-fonts # for git prompt, vim status line, make it a dep.
-          vimCfg.nvimCustom
+    vscodium =
+      nixpkgs.pkgs.vscode-with-extensions.override
+        { vscode = nixpkgs.pkgs.vscodium;
+          vscodeExtensions =
+            with nixpkgs.pkgs.vscode-extensions;
+            # Extensions from 
+            # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/editors/vscode/extensions/default.nix
+            [
+              # Needs to be installed explicitly for haskell.haskell to work
+              justusadam.language-haskell
+              haskell.haskell
+              #ms-vscode-remote.remote-ssh # unfree
+            ]
+            # Extensions from marketplace
+            ++ nixpkgs.pkgs.vscode-utils.extensionsFromVscodeMarketplace
+            [
+              #{
+              #  name = "";
+              #  publisher = "";
+              #  version = "";
+              #  sha256 = "";
+              #}
+            ];
+        };
 
-          nixpkgs.pkgs.cabal-install
-          nixpkgs.pkgs.hlint
-          nixpkgs.haskellPackages.fourmolu
-          nixpkgs.pkgs.ghcid
-          hpkgs.haskell-language-server
-        ] ++ (if vscode then [ nixpkgs.pkgs.vscode-with-extensions ] else []) ;
+    otherPackages =
+        [ nixpkgs.pkgs.cabal-install
+
+          nixpkgs.pkgs.par                     # paragraph formatting for vim
+          nixpkgs.pkgs.powerline-fonts         # for vim status line
+          vimCfg.nvimCustom
+        ] ++
+          ( if (all || haskell-tools)
+            then
+            [ #nixpkgs.pkgs.hlint
+              #nixpkgs.haskellPackages.fourmolu
+              #nixpkgs.pkgs.ghcid
+              hpkgs.haskell-language-server
+            ] else []
+          ) ++
+          ( if (all || editors)
+            #then [ vscode ]
+            then [ vscodium ]
+            else []
+          );
 
 #------------------------------------------------------------------------------
 # Generic stuff
@@ -100,5 +141,5 @@ let
         { inherit nixpkgs; };
 
 in if nixpkgs.lib.inNixShell
-   then utils.mkShell hpkgs (p: [additionalDeps]) otherPackages docs true
+   then utils.mkShell hpkgs (p: [additionalDeps]) otherPackages hoogle true
    else abort "nix-shell only please!"
