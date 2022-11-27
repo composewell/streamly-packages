@@ -108,6 +108,8 @@ set noerrorbells
 set vb t_vb=
 
 if &term =~ '256color'
+  " Fix redraw issue on scrolling when in tmux.
+  " See https://sunaku.github.io/vim-256color-bce.html
   " disable Background Color Erase (BCE) so that color schemes
   " render properly when inside 256-color tmux and GNU screen.
   " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
@@ -134,6 +136,21 @@ endif
 " }}}
 
 " Colors and Fonts {{{
+
+" See :h coc-highlights
+" See https://github.com/vim-scripts/wombat256.vim/blob/master/colors/wombat256mod.vim
+"autocmd ColorScheme * hi! link CocFloating CocHintFloat
+"autocmd ColorScheme wombat256mod highlight CocFloating ctermbg=White
+autocmd ColorScheme wombat256mod highlight CocErrorFloat ctermfg=196
+autocmd ColorScheme wombat256mod highlight CocErrorSign ctermfg=196
+"autocmd ColorScheme wombat256mod highlight CocErrorHighlight ctermfg=196
+autocmd ColorScheme wombat256mod highlight CocWarningFloat ctermfg=203
+autocmd ColorScheme wombat256mod highlight CocWarningSign ctermfg=203
+"autocmd ColorScheme wombat256mod highlight CocWarningHighlight ctermfg=203
+autocmd ColorScheme wombat256mod highlight CocHintFloat ctermfg=111
+autocmd ColorScheme wombat256mod highlight CocHintSign ctermfg=111
+autocmd ColorScheme wombat256mod highlight CocInfoFloat ctermfg=111
+autocmd ColorScheme wombat256mod highlight CocInfoSign ctermfg=111
 
 try
   colorscheme wombat256mod
