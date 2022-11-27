@@ -4,7 +4,7 @@
 # CAUTION! a spelling mistake in arg string is ignored silently.
 #
 # To use a specific ghc version:
-# nix-shell --argstr compiler "ghc922"
+# nix-shell --argstr compiler "ghc943"
 # nix-shell --arg editors true --arg hoogle true
 
 {
@@ -16,8 +16,8 @@
       # Unfree for some vscode extensions
         { config.allowUnfree = true;
         }
-, compiler ? "ghc943"
-, editors ? false
+, compiler ? "ghc925"
+, editors ? true
 , haskell-tools ? false
 , hoogle ? false
 , all ? false
@@ -91,7 +91,6 @@ let
             ] else []
           ) ++
           ( if (all || editors)
-            #then [ vscode ]
             then [ vscodium ]
             else []
           );
