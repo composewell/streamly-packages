@@ -14,6 +14,9 @@ ecosystem. Includes the following:
 
 Check the `nixpkgs` version in `default.nix`.
 
+See https://haskell-language-server.readthedocs.io/en/latest/features.html for
+Haskell language server features.
+
 # How to use it?
 
 Run nix-shell, and use ghc, cabal from the PATH:
@@ -27,20 +30,22 @@ You can also clone the repo and run `nix-shell` from the repo root directory.
 By default - only ghc, cabal and streamly packages are installed. You
 can use the following arguments to nix-shell to customize install:
 
-* editors true
 * haskell-tools true
 * hoogle true
 * all true
 
+haskell-tools may take a long time to build if it is not in the nix cache.
+
 For example,
 
 ```
-$ nix-shell --arg editors true --arg haskell-tools true ...
+$ nix-shell --arg haskell-tools true --arg hoogle true ...
 ```
 
 # Accessing the documentation
 
-Inside the nix shell, run the following command:
+You should have run the nix shell with `--arg hoogle true`. Inside the
+nix shell, run the following command:
 
 ```
 $ hoogle server --local -p 8080
@@ -56,6 +61,10 @@ Inside the nix shell, run the following command:
 $ nvim
 ```
 
+Use `ESC :q` to quit.
+Use `,h` for help.
+Use `:colorscheme morning` if you want a light theme.
+
 Add the following to your `$HOME/.config/nvim/coc-settings.json` to use the
 haskell language server with nvim:
 
@@ -66,7 +75,14 @@ haskell language server with nvim:
       "command": "haskell-language-server-wrapper",
       "args": ["--lsp"],
       "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
-      "filetypes": ["haskell", "lhaskell"]
+      "filetypes": ["haskell", "lhaskell"],
+      "settings": {
+        "haskell": {
+          "checkParents": "CheckOnSave",
+          "checkProject": true,
+          "formattingProvider": "fourmolu"
+        }
+      }
     }
   }
 }
