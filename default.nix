@@ -10,13 +10,13 @@
 {
   nixpkgs ?
     import (builtins.fetchTarball
-      #https://github.com/NixOS/nixpkgs/archive/refs/tags/22.05.tar.gz)
+      https://github.com/NixOS/nixpkgs/archive/refs/tags/22.05.tar.gz)
       # 23.05-pre
-      https://github.com/NixOS/nixpkgs/archive/b68bd2e.tar.gz)
+      #https://github.com/NixOS/nixpkgs/archive/b68bd2e.tar.gz)
       # Unfree for some vscode extensions
         { config.allowUnfree = true;
         }
-, compiler ? "ghc925"
+, compiler ? "ghc922"
 , editors ? true
 , haskell-tools ? false
 , hoogle ? false
