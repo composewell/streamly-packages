@@ -84,7 +84,7 @@ let
                         } {};
 
                     # test fails
-                    #http2 = recompile super.http2 ;
+                    http2 = recompile super.http2 ;
                     # test listens on some port
                     #streaming-commons = recompile super.streaming-commons ;
                     # test listens on some port
