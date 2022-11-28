@@ -140,5 +140,7 @@ let
         { inherit nixpkgs; };
 
 in if nixpkgs.lib.inNixShell
-   then utils.mkShell hpkgs (p: [additionalDeps]) otherPackages hoogle true
+   then
+      utils.mkShell
+        hpkgs (p: [additionalDeps]) otherPackages (all || hoogle) true
    else abort "nix-shell only please!"
