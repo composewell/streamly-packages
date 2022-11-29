@@ -36,7 +36,7 @@ let
           streamly-core
           streamly
           #streamly-bytestring
-          #streamly-examples
+          streamly-examples
           streamly-coreutils
           #streamly-lz4
           streamly-metrics
@@ -55,7 +55,7 @@ let
         { vscode = nixpkgs.pkgs.vscodium;
           vscodeExtensions =
             with nixpkgs.pkgs.vscode-extensions;
-            # Extensions from 
+            # Extensions from
             # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/editors/vscode/extensions/default.nix
             [
               # Needs to be installed explicitly for haskell.haskell to work
