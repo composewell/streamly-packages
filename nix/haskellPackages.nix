@@ -42,7 +42,7 @@ let
 
                     streamly-coreutils = utils.github super
                         "composewell/streamly-coreutils"
-                        "5498ac9e6cdf3fe11d29c3574b758616ba5797a5";
+                        "04aff9e3efb288472bcd0f6a7efebc3fea5df704";
 
                     streamly-examples = utils.github super
                         "composewell/streamly-examples"
@@ -58,7 +58,7 @@ let
 
                     streamly-process = utils.github super
                         "composewell/streamly-process"
-                        "3ba7fd059f7fea64e8faf50dbcdb63ba82bcc018";
+                        "bc48e758ab05276cb124eabb85d1e88941065d18";
 
                     streamly-shell = utils.github super
                         "composewell/streamly-shell"
@@ -66,7 +66,7 @@ let
 
                     streamly-statistics = utils.github super
                         "composewell/streamly-statistics"
-                        "01b6c6f631b1200b6adb66c484d1abe3dc94a3ca";
+                        "1fb3f29e7616f1fcbe6ee4c102475c39f10f8af3";
 
                     # Non-streamly packages
                     lockfree-queue =
