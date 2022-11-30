@@ -50,7 +50,7 @@ let
 
                     streamly-lz4 = utils.github super
                         "composewell/streamly-lz4"
-                        "a929c20fb582da95783f84a48dc174204cb8601d";
+                        "6ce34e21275f16786f1541419554ea3a9540747a";
 
                     streamly-metrics = utils.github super
                         "composewell/streamly-metrics"

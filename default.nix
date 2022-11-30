@@ -38,7 +38,7 @@ let
           #streamly-bytestring
           streamly-examples
           streamly-coreutils
-          #streamly-lz4
+          streamly-lz4
           streamly-metrics
           streamly-process
           streamly-shell
