@@ -33,40 +33,40 @@ let
 
                     streamly-core = utils.githubSubdir super
                         "composewell/streamly"
-                        "e061109f76ef37a288de0cafa37ea950c467cb82"
+                        "3f82f0035a7eb787cd9c037c0115d4630a46e069"
                         "/core";
 
                     streamly = utils.github super
                         "composewell/streamly"
-                        "e061109f76ef37a288de0cafa37ea950c467cb82";
+                        "3f82f0035a7eb787cd9c037c0115d4630a46e069";
 
                     streamly-coreutils = utils.github super
                         "composewell/streamly-coreutils"
-                        "acf1ca79b964e7c92ddfc71ca77c1adcba7e2450";
+                        "e51fe704dfd029784a6b504ac178e841e68ce02a";
 
                     streamly-examples = utils.github super
                         "composewell/streamly-examples"
-                        "be3e280883be89b94c6b7b67a5bd171bf0dbc06f";
+                        "b6f55d229f9e3dee6cd4f1148cc1d52949fd15f8";
 
                     streamly-lz4 = utils.github super
                         "composewell/streamly-lz4"
-                        "a929c20fb582da95783f84a48dc174204cb8601d";
+                        "6ce34e21275f16786f1541419554ea3a9540747a";
 
                     streamly-metrics = utils.github super
                         "composewell/streamly-metrics"
-                        "1970d50381fc71de27f0f39cd7f3f5787373b8f9";
+                        "d59127df9aaf3298c743c562470bf99dacbdb6b8";
 
                     streamly-process = utils.github super
                         "composewell/streamly-process"
-                        "fb45eedcd1320d552fb49048e1d733cbf5d46711";
+                        "49e5cc1ab30ad0fe8b69a9735c5ba26faa656a20";
 
                     streamly-shell = utils.github super
                         "composewell/streamly-shell"
-                        "05200f63005970a8cbfe5b4f83a2d3a7ed42554b";
+                        "b0c6318119d1cc5e2106343f17b5cff2ad94417f";
 
                     streamly-statistics = utils.github super
                         "composewell/streamly-statistics"
-                        "0145cd27fafb07df506bbc84de5b400103639021";
+                        "969a298dc8b75b1cbd60c126d0213bb2d0ccf2c1";
 
                     # Non-streamly packages
                     lockfree-queue =
