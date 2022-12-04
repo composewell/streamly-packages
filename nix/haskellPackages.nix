@@ -33,20 +33,20 @@ let
 
                     streamly-core = utils.githubSubdir super
                         "composewell/streamly"
-                        "3a21b44607fd710647adaa14a75d7dfd71081336"
+                        "3f82f0035a7eb787cd9c037c0115d4630a46e069"
                         "/core";
 
                     streamly = utils.github super
                         "composewell/streamly"
-                        "3a21b44607fd710647adaa14a75d7dfd71081336";
+                        "3f82f0035a7eb787cd9c037c0115d4630a46e069";
 
                     streamly-coreutils = utils.github super
                         "composewell/streamly-coreutils"
-                        "04aff9e3efb288472bcd0f6a7efebc3fea5df704";
+                        "e51fe704dfd029784a6b504ac178e841e68ce02a";
 
                     streamly-examples = utils.github super
                         "composewell/streamly-examples"
-                        "a1703a47d2f99d850c485eb537abbbcd7c9638a8";
+                        "b6f55d229f9e3dee6cd4f1148cc1d52949fd15f8";
 
                     streamly-lz4 = utils.github super
                         "composewell/streamly-lz4"
@@ -54,19 +54,19 @@ let
 
                     streamly-metrics = utils.github super
                         "composewell/streamly-metrics"
-                        "1a7409bd06a417457d2650c2a06b11aa4212cdf5";
+                        "d59127df9aaf3298c743c562470bf99dacbdb6b8";
 
                     streamly-process = utils.github super
                         "composewell/streamly-process"
-                        "bc48e758ab05276cb124eabb85d1e88941065d18";
+                        "49e5cc1ab30ad0fe8b69a9735c5ba26faa656a20";
 
                     streamly-shell = utils.github super
                         "composewell/streamly-shell"
-                        "5f11858e89fed9f0fdae1115a38805e7d900b483";
+                        "b0c6318119d1cc5e2106343f17b5cff2ad94417f";
 
                     streamly-statistics = utils.github super
                         "composewell/streamly-statistics"
-                        "1fb3f29e7616f1fcbe6ee4c102475c39f10f8af3";
+                        "969a298dc8b75b1cbd60c126d0213bb2d0ccf2c1";
 
                     # Non-streamly packages
                     lockfree-queue =

@@ -20,7 +20,6 @@ let
                 url = url;
                 rev = rev;
                 ref = branch;
-                allRefs = true;
             }; in super.callCabal2nix pkg "${src}${subdir}" {})
             (old:
               { librarySystemDepends =
