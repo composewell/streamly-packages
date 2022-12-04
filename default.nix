@@ -10,13 +10,13 @@
 {
   nixpkgs ?
     import (builtins.fetchTarball
-      https://github.com/NixOS/nixpkgs/archive/refs/tags/22.05.tar.gz)
+      https://github.com/NixOS/nixpkgs/archive/refs/tags/22.11.tar.gz)
       # 23.05-pre
       #https://github.com/NixOS/nixpkgs/archive/b68bd2e.tar.gz)
       # Unfree for some vscode extensions
         { config.allowUnfree = true;
         }
-, compiler ? "ghc922"
+, compiler ? "ghc92"
 , editors ? true
 , haskell-tools ? false
 , hoogle ? false
@@ -36,7 +36,7 @@ let
           streamly-core
           streamly
           #streamly-bytestring
-          streamly-examples
+          #streamly-examples
           streamly-coreutils
           #streamly-lz4
           streamly-metrics
