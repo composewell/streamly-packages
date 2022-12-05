@@ -1,6 +1,5 @@
 # Copyright   : (c) 2022 Composewell Technologies
-# License     : All rights reserved.
-
+#
 # CAUTION! a spelling mistake in arg string is ignored silently.
 #
 # To use a specific ghc version:

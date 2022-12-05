@@ -1,3 +1,5 @@
+Copyright (c) 2022 Composewell Technologies
+
 Press space bar on "+" sign to unfold a group, type zR to unfold all
 Using this cheatsheet {{{~
 ==========================

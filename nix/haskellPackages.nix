@@ -1,5 +1,4 @@
 # Copyright   : (c) 2022 Composewell Technologies
-# License     : All rights reserved.
 
 {nixpkgs, compiler}:
 let

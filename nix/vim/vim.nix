@@ -1,3 +1,5 @@
+# Copyright (c) 2022 Composewell Technologies
+
 {nixpkgs}:
 with import ../utils.nix {nixpkgs = nixpkgs;};
 let plugins = with nixpkgs.pkgs.vimPlugins; {

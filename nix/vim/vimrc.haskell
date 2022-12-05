@@ -1,4 +1,5 @@
 " Adapted from Haskell vim now
+" XXX This needs to be updated.
 
 " Conceal {{{
 " Use same color behind concealed unicode characters
