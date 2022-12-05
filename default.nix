@@ -16,7 +16,7 @@
       # Unfree for some vscode extensions
         { config.allowUnfree = true;
         }
-, compiler ? "ghc92"
+, compiler ? "default"
 , editors ? true
 , haskell-tools ? false
 , hoogle ? false

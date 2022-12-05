@@ -69,19 +69,19 @@ let
                         "969a298dc8b75b1cbd60c126d0213bb2d0ccf2c1";
 
                     # Non-streamly packages
-                    lockfree-queue =
-                      super.callHackageDirect
-                        { pkg = "lockfree-queue";
-                          ver = "0.2.4";
-                          sha256 = "sha256-h1s/tiBq5Gzl8FtenQacmxJp7zPJPnmZXtKDPvxTSa4=";
-                        } {};
+                    #lockfree-queue =
+                    #  super.callHackageDirect
+                    #    { pkg = "lockfree-queue";
+                    #      ver = "0.2.4";
+                    #      sha256 = "sha256-h1s/tiBq5Gzl8FtenQacmxJp7zPJPnmZXtKDPvxTSa4=";
+                    #    } {};
 
-                    size-based =
-                      super.callHackageDirect
-                        { pkg = "size-based";
-                          ver = "0.1.3.0";
-                          sha256 = "sha256-eTGKg87Ii8ySZzL2kbMjkCrUTZm4CFpvU67MkjfMesk=";
-                        } {};
+                    #size-based =
+                    #  super.callHackageDirect
+                    #    { pkg = "size-based";
+                    #      ver = "0.1.3.0";
+                    #      sha256 = "sha256-eTGKg87Ii8ySZzL2kbMjkCrUTZm4CFpvU67MkjfMesk=";
+                    #    } {};
 
                     # test fails
                     #http2 = recompile super.http2 ;
