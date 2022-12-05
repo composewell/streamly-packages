@@ -17,8 +17,8 @@
         }
 , compiler ? "default"
 , editors ? true
-, haskell-tools ? false
-, hoogle ? false
+, haskell-tools ? true
+, hoogle ? true
 , all ? false
 }:
 

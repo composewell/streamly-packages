@@ -22,30 +22,22 @@ Haskell language server features.
 Run nix-shell, and use ghc, cabal from the PATH:
 
 ```
-$ nix-shell https://github.com/composewell/streamly-packages/archive/master.tar.gz
+$ nix-shell https://github.com/composewell/streamly-packages/archive/v0.1.0.tar.gz
 ```
 
 You can also clone the repo and run `nix-shell` from the repo root directory.
 
-By default - only ghc, cabal and streamly packages are installed. You
-can use the following arguments to nix-shell to customize install:
-
-* haskell-tools true
-* hoogle true
-* all true
-
-haskell-tools may take a long time to build if it is not in the nix cache.
-
-For example,
+By default everything is installed. If it takes too long or uses too
+much disk space, you can pass some arguments to nix-shell to customize
+install, for example:
 
 ```
-$ nix-shell --arg haskell-tools true --arg hoogle true ...
+$ nix-shell --arg haskell-tools false --arg hoogle false ...
 ```
 
 # Accessing the documentation
 
-You should have run the nix shell with `--arg hoogle true`. Inside the
-nix shell, run the following command:
+Inside the nix shell, run the following command:
 
 ```
 $ hoogle server --local -p 8080
