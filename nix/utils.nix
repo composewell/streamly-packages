@@ -40,10 +40,10 @@ let
     git = super: pkg: url: rev: gitSubdir super pkg url rev "";
 
     githubSubdir = super: pkg: rev: subdir:
-      gitSubdir super pkg "git@github.com:${pkg}.git" rev subdir;
+      gitSubdir super pkg "https://github.com:${pkg}.git" rev subdir;
 
     github = super: pkg: rev:
-      git super pkg "git@github.com:${pkg}.git" rev;
+      git super pkg "https://github.com:${pkg}.git" rev;
 
     mkShell = shellDrv: pkgs: otherPkgs: doHoogle: doBench: shellDrv.shellFor {
         packages = pkgs;
