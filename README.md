@@ -35,6 +35,16 @@ install, for example:
 $ nix-shell --arg haskell-tools false --arg hoogle false ...
 ```
 
+# Updating package versions
+
+Edit [nix/haskellPackages.nix](nix/haskellPackages.nix) file to specify
+particular github commits or package versions from hackage to be used.
+
+Changing a commit may break other packages dependent on the changed
+package. If you do not need the broken packages you can comment those in
+[default.nix](default.nix). Otherwise change the commits of the broken
+packages as well accordingly.
+
 # Accessing the documentation
 
 Inside the nix shell, run the following command:
