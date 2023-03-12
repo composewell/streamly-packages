@@ -26,26 +26,47 @@ let
                     fusion-plugin =
                       super.callHackageDirect
                         { pkg = "fusion-plugin";
-                          ver = "0.2.5";
-                          sha256 = "sha256-a5ZIi810Utsj0UsQZwnCaRYIJ8RWLUqppg4lYaNvOkM=";
+                          ver = "0.2.6";
+                          sha256 = "sha256-Hub0nrv+kq/dK2QDSFC7yo4PMRLwKLpofmzgJjmtCLo=";
                         } {};
 
-                    streamly-core = utils.githubSubdir super
-                        "composewell/streamly"
-                        "3f82f0035a7eb787cd9c037c0115d4630a46e069"
-                        "/core";
+                    #streamly-core = utils.githubSubdir super
+                    #    "composewell/streamly"
+                    #    "c6bc31792089bd31c74aebea51b5038c24a81e5a"
+                    #    "/core";
 
-                    streamly = utils.github super
-                        "composewell/streamly"
-                        "3f82f0035a7eb787cd9c037c0115d4630a46e069";
+                    streamly-core =
+                      super.callHackageDirect
+                        { pkg = "streamly-core";
+                          ver = "0.1.0";
+                          sha256 = "sha256-hoSV6Q2+X5a7hFnJAArqNPjcMaCVyX9Vz4FcxeJ+jgI=";
+                        } {};
+
+                    #streamly = utils.github super
+                    #    "composewell/streamly"
+                    #    "c6bc31792089bd31c74aebea51b5038c24a81e5a";
+
+                    streamly =
+                      super.callHackageDirect
+                        { pkg = "streamly";
+                          ver = "0.9.0";
+                          sha256 = "sha256-eOxVb8qQjZDo1+S7CStqYSExOg2QHWkMY+zlOYqwZak=";
+                        } {};
 
                     streamly-coreutils = utils.github super
                         "composewell/streamly-coreutils"
-                        "e51fe704dfd029784a6b504ac178e841e68ce02a";
+                        "d36e0810b9f091eafaadc183a02de9c0cce6eada";
 
-                    streamly-examples = utils.github super
-                        "composewell/streamly-examples"
-                        "b6f55d229f9e3dee6cd4f1148cc1d52949fd15f8";
+                    #streamly-examples = utils.github super
+                    #    "composewell/streamly-examples"
+                    #    "b6f55d229f9e3dee6cd4f1148cc1d52949fd15f8";
+
+                    streamly-examples =
+                      super.callHackageDirect
+                        { pkg = "streamly-examples";
+                          ver = "0.1.3";
+                          sha256 = "sha256-clZw1bNS66X4jOWKIqAMTXpIvJgvRhs5yCBWsHqZTIs=";
+                        } {};
 
                     streamly-lz4 = utils.github super
                         "composewell/streamly-lz4"
@@ -57,7 +78,7 @@ let
 
                     streamly-process = utils.github super
                         "composewell/streamly-process"
-                        "49e5cc1ab30ad0fe8b69a9735c5ba26faa656a20";
+                        "d80b860d9d8ea98e4f7f63390442b3155c34dd08";
 
                     streamly-shell = utils.github super
                         "composewell/streamly-shell"
@@ -65,7 +86,7 @@ let
 
                     streamly-statistics = utils.github super
                         "composewell/streamly-statistics"
-                        "969a298dc8b75b1cbd60c126d0213bb2d0ccf2c1";
+                        "a8f1621a93149127f98d02ec14444103c4ea338d";
 
                     # Non-streamly packages
                     #lockfree-queue =
