@@ -1,48 +1,59 @@
-# Streamly Development Shell
+# Streamly Dev Shell
 
 Nix shell based development environment for Haskell Streamly
 ecosystem. Includes the following:
 
-* Haskell compiler `ghc`
-* Haskell project build tool `cabal`
+* Haskell compiler - `ghc`
+* Haskell project build tool - `cabal`
 * Streamly ecosystem libraries
 * Hoogle server for documentation
 * Haskell language server (HLS)
 * A few other Haskell dev tools
 * Vi editor `nvim`
-* Visual Studio Code editor `code`
+* Visual Studio Code editor `codium`
 
-Check the `nixpkgs` version in `default.nix`.
+Check the `nixpkgs` version in [default.nix](default.nix).
 
-See https://haskell-language-server.readthedocs.io/en/latest/features.html for
-Haskell language server features.
+Please refer to
+[this page](https://haskell-language-server.readthedocs.io/en/latest/features.html)
+for Haskell language server features.
 
-# How to use it?
+# How to use the Shell?
 
-Run nix-shell, and use ghc, cabal from the PATH:
+To get a shell with the development environment installed in it, use the
+following command:
 
 ```
 $ nix-shell https://github.com/composewell/streamly-packages/archive/v0.1.0.tar.gz
 ```
 
-You can also clone the repo and run `nix-shell` from the repo root directory.
-
 By default everything is installed. If it takes too long or uses too
-much disk space, you can pass some arguments to nix-shell to customize
-install, for example:
+much disk space, you can pass arguments to the nix expression to
+customize install, for example:
 
 ```
 $ nix-shell --arg haskell-tools false --arg hoogle false ...
 ```
 
+Check out [default.nix](default.nix) for all available options.
+
+Once you are in the shell, you can use `ghc`, `cabal`, `nvim`, `codium`,
+`hoogle`, and other tools from the PATH. `ghc` will have streamly packages
+installed in its package database, so you can directly use it without any
+package downloads.
+
+Note: To run the nix-shell, you can also clone the streamly-packages
+repo and run `nix-shell` from the repo root directory.
+
 # Updating package versions
 
-Edit [nix/haskellPackages.nix](nix/haskellPackages.nix) file to specify
-particular github commits or package versions from hackage to be used.
+To update the versions of Haskell packages included, edit the
+[nix/haskellPackages.nix](nix/haskellPackages.nix) file to specify
+particular git commit ids or package versions from hackage to be used.
 
-Changing a commit may break other packages dependent on the changed
+Changing a package version may break other packages dependent on the changed
 package. If you do not need the broken packages you can comment those in
-[default.nix](default.nix). Otherwise change the commits of the broken
+[default.nix](default.nix). Otherwise change the versions of the broken
 packages as well accordingly.
 
 # Accessing the documentation
@@ -99,15 +110,23 @@ following command in the nix-shell:
 $ codium
 ```
 
-If you get a pop up saying: "How do you want the extension to
-manage/discover HLS and the relevant toolchain?" Choose, "Manually
-via PATH" if you have built the nix derivation with `haskell-tools`
-included. You can also set it in the following section in settings:
+If you have started the nix-shell with `haskell-tools` included, you
+will have the Haskell Language Server installed in the shell.  If you
+get a pop up saying: "How do you want the extension to manage/discover
+HLS and the relevant toolchain?" just choose, "Manually via PATH".
+
+You can also set it later in the following section in settings:
   * Extensions
     * Haskell
       * Manage HLS
         * PATH
 
-You can also use your existing installation of VSCode, just make sure to
-run it from the nix-shell so that the language server is able to see the
-installed libraries.
+If you wish to use your existing installation of VSCode instead of
+`codium` from the nix-shell, you can do that too, just make sure to run
+it from within the nix-shell so that it is able to use the installed
+Haskell tools and libraries. For example, on MacOS, if you have your
+vscode app in `Downloads` folder:
+
+```
+$ open ~/Downloads/Visual\ Studio\ Code.app
+```
