@@ -53,6 +53,10 @@ let
                           sha256 = "sha256-eOxVb8qQjZDo1+S7CStqYSExOg2QHWkMY+zlOYqwZak=";
                         } {};
 
+                    streamly-bytestring = utils.github super
+                        "psibi/streamly-bytestring"
+                        "66f3ada3b8a8b760b4e32065206b557428fcef6c";
+
                     streamly-coreutils = utils.github super
                         "composewell/streamly-coreutils"
                         "d36e0810b9f091eafaadc183a02de9c0cce6eada";
