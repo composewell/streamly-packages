@@ -42,8 +42,17 @@ Once you are in the shell, you can use `ghc`, `cabal`, `nvim`, `codium`,
 installed in its package database, so you can directly use it without any
 package downloads.
 
-Note: To run the nix-shell, you can also clone the streamly-packages
+# Cloning the streamly-packages repo
+
+To run the nix-shell, you can also clone the streamly-packages
 repo and run `nix-shell` from the repo root directory.
+
+```
+$ git clone https://github.com/composewell/streamly-packages
+```
+
+This is especially useful if you would like to customize the environment before
+using.
 
 # Updating package versions
 
