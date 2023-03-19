@@ -47,11 +47,20 @@ let
                     #    "c6bc31792089bd31c74aebea51b5038c24a81e5a";
 
                     streamly =
-                      super.callHackageDirect
-                        { pkg = "streamly";
-                          ver = "0.9.0";
-                          sha256 = "sha256-eOxVb8qQjZDo1+S7CStqYSExOg2QHWkMY+zlOYqwZak=";
-                        } {};
+                      nixpkgs.haskell.lib.overrideCabal
+                          (
+                            super.callHackageDirect
+                              { pkg = "streamly";
+                                ver = "0.9.0";
+                                sha256 = "sha256-eOxVb8qQjZDo1+S7CStqYSExOg2QHWkMY+zlOYqwZak=";
+                              } {}
+                          )
+                          (old:
+                            { librarySystemDepends =
+                                if builtins.currentSystem == "x86_64-darwin"
+                                then [nixpkgs.darwin.apple_sdk.frameworks.Cocoa]
+                                else [];
+                            });
 
                     streamly-bytestring = utils.github super
                         "psibi/streamly-bytestring"
