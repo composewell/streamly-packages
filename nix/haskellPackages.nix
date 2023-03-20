@@ -57,7 +57,7 @@ let
                           )
                           (old:
                             { librarySystemDepends =
-                                if builtins.currentSystem == "x86_64-darwin"
+                                if nixpkgs.lib.strings.hasInfix "darwin" builtins.currentSystem
                                 then [nixpkgs.darwin.apple_sdk.frameworks.Cocoa]
                                 else [];
                             });
