@@ -46,6 +46,7 @@ let
           # Additional packages
           hspec
           tasty-bench
+          ghczdecode
         ];
 
     vimCfg = import nix/vim/vim.nix {nixpkgs = nixpkgs;};
