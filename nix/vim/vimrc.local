@@ -115,9 +115,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "let g:tagbar_left = 1
 
 set tags+=codex.tags;/
-set cscopeprg=hscope
-set cscopetag
-set cscopetagorder=1 " search tags first
+" set cscopeprg=hscope
+" set cscopetag
+" set cscopetagorder=1 " search tags first
 
 function! CsAddHscope()
   let db = findfile("hscope.out", ".;")
