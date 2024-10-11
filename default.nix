@@ -9,13 +9,13 @@
 {
   nixpkgs ?
     import (builtins.fetchTarball
-      https://github.com/NixOS/nixpkgs/archive/refs/tags/22.11.tar.gz)
+      https://github.com/NixOS/nixpkgs/archive/refs/tags/23.11.tar.gz)
       # 23.05-pre
       #https://github.com/NixOS/nixpkgs/archive/b68bd2e.tar.gz)
       # Unfree for some vscode extensions
         { config.allowUnfree = true;
         }
-, compiler ? "default"
+, compiler ? "ghc96"
 , editors ? true
 , haskell-tools ? true
 , hoogle ? true
@@ -31,22 +31,22 @@ let
     haskellLibDeps =
       with hpkgs;
         [ # Streamly packages
-          fusion-plugin
-          streamly-core
-          streamly
-          #streamly-bytestring
-          streamly-examples
-          streamly-coreutils
-          #streamly-lz4
-          streamly-metrics
-          streamly-process
-          streamly-shell
-          streamly-statistics
+          #fusion-plugin
+          #streamly-core
+          #streamly
+          ##streamly-bytestring
+          #streamly-examples
+          #streamly-coreutils
+          ##streamly-lz4
+          #streamly-metrics
+          #streamly-process
+          #streamly-shell
+          #streamly-statistics
 
-          # Additional packages
-          hspec
-          tasty-bench
-          ghczdecode
+          ## Additional packages
+          #hspec
+          #tasty-bench
+          #ghczdecode
         ];
 
     vimCfg = import nix/vim/vim.nix {nixpkgs = nixpkgs;};
