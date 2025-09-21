@@ -2,6 +2,19 @@
 
 {nixpkgs}:
 let
+    hackage = super: pkg: ver: sha256:
+      nixpkgs.haskell.lib.overrideCabal
+        (super.callHackageDirect
+          { pkg = pkg;
+            ver = ver;
+            sha256 = sha256;
+          } {})
+        (old:
+          { #enableLibraryProfiling = prof;
+            #doHaddock = false;
+            doCheck = false;
+          });
+
     # we can possibly avoid adding our package to HaskellPackages like
     # in the case of nix-shell for a single package?
     local = super: pkg: path: opts: inShell:
@@ -72,6 +85,7 @@ let
 
 in
 {
+    inherit hackage;
     inherit local;
     inherit gitBranchDirFlags;
     inherit gitSubdirFlags;

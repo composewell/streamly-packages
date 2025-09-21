@@ -3,15 +3,13 @@
 # CAUTION! a spelling mistake in arg string is ignored silently.
 #
 # To use a specific ghc version:
-# nix-shell --argstr compiler "ghc943"
+# nix-shell --argstr compiler "ghc966"
 # nix-shell --arg editors true --arg hoogle true
 
 {
   nixpkgs ?
     import (builtins.fetchTarball
-      https://github.com/NixOS/nixpkgs/archive/refs/tags/23.11.tar.gz)
-      # 23.05-pre
-      #https://github.com/NixOS/nixpkgs/archive/b68bd2e.tar.gz)
+      https://github.com/NixOS/nixpkgs/archive/refs/tags/branch-off-24.11.tar.gz)
       # Unfree for some vscode extensions
         { config.allowUnfree = true;
         }
@@ -31,22 +29,24 @@ let
     haskellLibDeps =
       with hpkgs;
         [ # Streamly packages
-          #fusion-plugin
-          #streamly-core
-          #streamly
-          ##streamly-bytestring
-          #streamly-examples
-          #streamly-coreutils
-          ##streamly-lz4
+          fusion-plugin
+          streamly
+          streamly-bytestring
+          streamly-core
+          streamly-coreutils
+          streamly-examples
+          streamly-filepath
+          streamly-fsevents
+          #streamly-lz4
           #streamly-metrics
-          #streamly-process
-          #streamly-shell
-          #streamly-statistics
+          streamly-process
+          streamly-statistics
+          streamly-text
 
           ## Additional packages
-          #hspec
-          #tasty-bench
-          #ghczdecode
+          hspec
+          tasty-bench
+          ghczdecode
         ];
 
     vimCfg = import nix/vim/vim.nix {nixpkgs = nixpkgs;};
