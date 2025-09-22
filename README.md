@@ -24,7 +24,7 @@ To get a shell with the development environment installed in it, use the
 following command:
 
 ```
-$ nix-shell https://github.com/composewell/streamly-packages/archive/v0.1.0.tar.gz
+$ nix-shell https://github.com/composewell/streamly-packages/archive/v0.1.4.tar.gz
 ```
 
 By default everything is installed. If it takes too long or uses too
