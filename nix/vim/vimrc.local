@@ -58,12 +58,12 @@ let g:haskell_indent_disable = 1
 
 " }}}
 " Indentation {{{
-let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_enable_on_vim_startup = 1
 let indent_guides_guide_size = 0
 
 " reset guides on shiftwidth change
 " needs vim >= 7.4.786
-autocmd OptionSet * call indent_guides#process_autocmds()
+"autocmd OptionSet * call indent_guides#process_autocmds()
 
 " reset indent guides e.g. after changing shiftwidth
 nmap <Leader>ir :IndentGuidesToggle<CR>:IndentGuidesToggle<CR>
