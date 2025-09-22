@@ -1,4 +1,4 @@
-# Streamly Dev Shell
+# Haskell Streamly Development Shell
 
 Nix shell based development environment for Haskell Streamly
 ecosystem. Includes the following:
@@ -12,13 +12,17 @@ ecosystem. Includes the following:
 * Vi editor `nvim`
 * Visual Studio Code editor `codium`
 
-Check the `nixpkgs` version in [default.nix](default.nix).
+Check the `nixpkgs` version in the [default.nix](default.nix) file.
 
 Please refer to
 [this page](https://haskell-language-server.readthedocs.io/en/latest/features.html)
 for Haskell language server features.
 
-# How to use the Shell?
+# Starting the Shell
+
+There are two ways to start the nix shell.
+
+## Directly using github URL
 
 To get a shell with the development environment installed in it, use the
 following command:
@@ -27,9 +31,9 @@ following command:
 nix-shell https://github.com/composewell/streamly-packages/archive/v0.1.4.tar.gz
 ```
 
-By default everything is installed. If it takes too long or uses too
-much disk space, you can pass arguments to the nix expression to
-customize install, for example:
+By default all optional features are installed. If it takes too long or
+uses too much disk space, you can pass arguments to the nix expression
+to customize install, for example:
 
 ```
 nix-shell --arg haskell-tools false --arg hoogle false ...
@@ -37,27 +41,37 @@ nix-shell --arg haskell-tools false --arg hoogle false ...
 
 Check out [default.nix](default.nix) for all available options.
 
-Once you are in the shell, you can use `ghc`, `cabal`, `nvim`, `codium`,
-`hoogle`, and other tools from the PATH. `ghc` will have streamly packages
-installed in its package database, so you can directly use it without any
-package downloads.
+## By cloning the github repo
 
-# Cloning the streamly-packages repo
-
-To run the nix-shell, you can also clone the streamly-packages
-repo and run `nix-shell` from the repo root directory.
+You can clone the `streamly-packages` repo and run the `nix-shell`
+command from the repo root directory.
 
 ```
 git clone https://github.com/composewell/streamly-packages
+cd streamly-packages
+nix-shell
 ```
 
 This is especially useful if you would like to customize the environment before
 using.
 
+# Using the Shell
+
+Once you are in the shell, you can use `ghc`, `cabal`, `nvim`, `codium`,
+`hoogle`, and other tools from the PATH. `ghc` will have streamly packages
+installed in its package database, ready to use.
+
+To start with, you can try building and running the examples from the
+[streamly-examples](https://github.com/composewell/streamly-examples/tree/v0.3.0/examples)
+package.
+
+Alternatively, you can start the interactive repl `ghci` and run Haskell
+code interactively.
+
 # Show installed packages
 
-To show the Haskell packages that are readily available, run the following
-command in the nix shell:
+To show the Haskell packages that are already installed in the shell,
+run the following command in the nix shell:
 
 ```
 ghc-pkg list
