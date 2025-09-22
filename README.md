@@ -24,7 +24,7 @@ To get a shell with the development environment installed in it, use the
 following command:
 
 ```
-$ nix-shell https://github.com/composewell/streamly-packages/archive/v0.1.4.tar.gz
+nix-shell https://github.com/composewell/streamly-packages/archive/v0.1.4.tar.gz
 ```
 
 By default everything is installed. If it takes too long or uses too
@@ -32,7 +32,7 @@ much disk space, you can pass arguments to the nix expression to
 customize install, for example:
 
 ```
-$ nix-shell --arg haskell-tools false --arg hoogle false ...
+nix-shell --arg haskell-tools false --arg hoogle false ...
 ```
 
 Check out [default.nix](default.nix) for all available options.
@@ -48,7 +48,7 @@ To run the nix-shell, you can also clone the streamly-packages
 repo and run `nix-shell` from the repo root directory.
 
 ```
-$ git clone https://github.com/composewell/streamly-packages
+git clone https://github.com/composewell/streamly-packages
 ```
 
 This is especially useful if you would like to customize the environment before
@@ -70,7 +70,7 @@ packages as well accordingly.
 Inside the nix shell, run the following command:
 
 ```
-$ hoogle server --local -p 8080
+hoogle server --local -p 8080
 ```
 
 Open the URL `http://127.0.0.1:8080` in your browser.
@@ -80,7 +80,7 @@ Open the URL `http://127.0.0.1:8080` in your browser.
 Inside the nix shell, run the following command:
 
 ```
-$ nvim
+nvim
 ```
 
 Use `ESC :q` to quit.
@@ -116,7 +116,7 @@ To run VSCodium, the open source version of Microsoft VSCode, run the
 following command in the nix-shell:
 
 ```
-$ codium
+codium
 ```
 
 If you have started the nix-shell with `haskell-tools` included, you
@@ -137,5 +137,5 @@ Haskell tools and libraries. For example, on MacOS, if you have your
 vscode app in `Downloads` folder:
 
 ```
-$ open ~/Downloads/Visual\ Studio\ Code.app
+open ~/Downloads/Visual\ Studio\ Code.app
 ```
