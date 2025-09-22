@@ -1,7 +1,9 @@
-# Haskell Streamly Development Shell
+# Haskell Development Shell
 
-Nix shell based development environment for Haskell Streamly
-ecosystem. Includes the following:
+A ready-to-use Nix shell environment tailored for Haskell, having
+Haskell Streamly and its ecosystem packages installed out of the
+box. Easily customizable to include any package from Hackage.
+**Includes:**
 
 * Haskell compiler - `ghc`
 * Haskell project build tool - `cabal`
@@ -12,7 +14,7 @@ ecosystem. Includes the following:
 * Vi editor `nvim`
 * Visual Studio Code editor `codium`
 
-Check the `nixpkgs` version in the [default.nix](default.nix) file.
+Check the `nixpkgs` version used in the [default.nix](default.nix) file.
 
 Please refer to
 [this page](https://haskell-language-server.readthedocs.io/en/latest/features.html)
