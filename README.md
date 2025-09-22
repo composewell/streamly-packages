@@ -54,6 +54,15 @@ git clone https://github.com/composewell/streamly-packages
 This is especially useful if you would like to customize the environment before
 using.
 
+# Show installed packages
+
+To show the Haskell packages that are readily available, run the following
+command in the nix shell:
+
+```
+ghc-pkg list
+```
+
 # Updating package versions
 
 To update the versions of Haskell packages included, edit the
@@ -64,6 +73,11 @@ Changing a package version may break other packages dependent on the changed
 package. If you do not need the broken packages you can comment those in
 [default.nix](default.nix). Otherwise change the versions of the broken
 packages as well accordingly.
+
+# Adding your own packages
+
+If you need any additional packages in this environment just add
+them to the list of packages in [default.nix](default.nix).
 
 # Accessing the documentation
 

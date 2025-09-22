@@ -34,7 +34,7 @@ let
           streamly-bytestring
           streamly-core
           streamly-coreutils
-          streamly-examples
+          #streamly-examples
           streamly-filepath
           streamly-fsevents
           #streamly-lz4
