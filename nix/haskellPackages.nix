@@ -23,15 +23,15 @@ let
                 with nixpkgs.haskell.lib;
                 {
                     # stan fails to build on macOS x86_64
-                    haskell-language-server =
-                    if nixpkgs.lib.strings.hasInfix "darwin" builtins.currentSystem
-                    then
-                      super.haskell-language-server.overrideAttrs (old: {
-                        configureFlags = (old.configureFlags or []) ++ [ "-f -stan" ];
-                        buildInputs = builtins.filter (pkg: pkg.pname or "" != "stan") (old.buildInputs or []);
-                        propagatedBuildInputs = builtins.filter (pkg: pkg.pname or "" != "stan") (old.propagatedBuildInputs or []);
-                      })
-                    else super.haskell-language-server;
+                    #haskell-language-server =
+                    #if nixpkgs.lib.strings.hasInfix "darwin" builtins.currentSystem
+                    #then
+                    #  super.haskell-language-server.overrideAttrs (old: {
+                    #    configureFlags = (old.configureFlags or []) ++ [ "-f -stan" ];
+                    #    buildInputs = builtins.filter (pkg: pkg.pname or "" != "stan") (old.buildInputs or []);
+                    #    propagatedBuildInputs = builtins.filter (pkg: pkg.pname or "" != "stan") (old.propagatedBuildInputs or []);
+                    #  })
+                    #else super.haskell-language-server;
 
                     # Streamly ecosystem packages
                     fusion-plugin = utils.hackage super

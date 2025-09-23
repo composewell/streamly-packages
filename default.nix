@@ -4,11 +4,22 @@
 nixpkgs ? import
 
 #------------------------------------------------------------------------------
-# Modify the version in this line to change the nixpkgs version
+# Modify the commit in this line to change the nixpkgs version
 #------------------------------------------------------------------------------
 
-(builtins.fetchTarball
-  https://github.com/NixOS/nixpkgs/archive/refs/tags/branch-off-24.11.tar.gz
+(
+let
+  commit =
+    if builtins.match ".*darwin.*" builtins.currentSystem != null
+    # use https://channels.nixos.org/nixpkgs-25.05-darwin/git-revision
+    then "c3d456aad3a84fcd76b4bebf8b48be169fc45c31"
+    # use https://channels.nixos.org/nixpkgs-25.05/git-revision
+    else "b2a3852bd078e68dd2b3dfa8c00c67af1f0a7d20";
+    #else "50ab793786d9de88ee30ec4e4c24fb4236fc2674"; # nixpkgs 24.11
+in
+  builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/${commit}.tar.gz";
+  }
 )
 
 #------------------------------------------------------------------------------
@@ -26,7 +37,7 @@ nixpkgs ? import
 # CAUTION! a spelling mistake in an arg string is ignored silently.
 
 # To use a specific ghc version: nix-shell --argstr compiler "ghc966"
-, compiler ? "ghc96"
+, compiler ? "default"
 
 # To disable installation of editors: nix-shell --arg editors false
 , editors ? true
@@ -60,11 +71,16 @@ installedDeps =
       streamly-process
       streamly-statistics
       streamly-text
+      streamly-examples
 
       ## Additional packages
+      ghczdecode
+
+      # For tests and benchmarks
       hspec
       tasty-bench
-      ghczdecode
+      temporary
+      scientific
     ];
 
 #------------------------------------------------------------------------------
