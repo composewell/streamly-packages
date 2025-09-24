@@ -95,13 +95,21 @@ let
                     #    "composewell/streamly-metrics"
                     #    "d59127df9aaf3298c743c562470bf99dacbdb6b8";
 
-                    streamly-filepath = utils.github super
-                        "composewell/streamly-filepath"
-                        "94c44438667fc41b082445c809b1c3a64bd043e0";
+                    #streamly-filepath = utils.github super
+                    #    "composewell/streamly-filepath"
+                    #    "94c44438667fc41b082445c809b1c3a64bd043e0";
 
-                    streamly-fsevents = utils.github super
-                        "composewell/streamly-fsevents"
-                        "fe2584e9502186090b1aee2671cca4bc14d7ad31";
+                    streamly-filepath = utils.hackage super
+                      "streamly-filepath" "0.1.0"
+                      "sha256-6bXya2KhvKtn2nBFiT+XsBrQuBKRsFKkYeZUAmsQleE=";
+
+                    #streamly-fsevents = utils.github super
+                    #    "composewell/streamly-fsevents"
+                    #    "fe2584e9502186090b1aee2671cca4bc14d7ad31";
+
+                    streamly-fsevents = utils.hackage super
+                      "streamly-fsevents" "0.1.0"
+                      "sha256-dMdbB+CquSiUuFBdnHl2iqtaUmnB5gnKA/8xTG8NEjc=";
 
                     #streamly-lz4 = utils.github super
                     #    "composewell/streamly-lz4"
@@ -115,9 +123,13 @@ let
                       "streamly-process" "0.4.0"
                       "sha256-8E2FLdBDDpX8TwJI/1OC9KLSAq77oHJC2yMwZFz7n6U=";
 
-                    streamly-statistics = utils.github super
-                        "composewell/streamly-statistics"
-                        "909e12df169d77215a8d69fd6901f4a61a61ba3f";
+                    #streamly-statistics = utils.github super
+                    #    "composewell/streamly-statistics"
+                    #    "909e12df169d77215a8d69fd6901f4a61a61ba3f";
+
+                    streamly-statistics = utils.hackage super
+                      "streamly-statistics" "0.2.0"
+                      "sha256-mkr7a3UOCFQqCQl+FRUruPaX4LZtuQt32MW86emnCG4=";
 
                     streamly-text = utils.hackage super
                       "streamly-text" "0.1.0"

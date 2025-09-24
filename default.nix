@@ -71,7 +71,7 @@ installedDeps =
       streamly-process
       streamly-statistics
       streamly-text
-      streamly-examples
+      #streamly-examples
 
       ## Additional packages
       ghczdecode
