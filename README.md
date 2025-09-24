@@ -1,4 +1,4 @@
-# Haskell Development Shell
+# Nix Shell for Haskell Development
 
 A ready-to-use Nix shell environment tailored for Haskell, having
 Haskell Streamly and its ecosystem packages installed out of the
