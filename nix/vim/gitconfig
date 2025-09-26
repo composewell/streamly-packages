@@ -1,0 +1,10 @@
+# vim: ft=gitconfig
+
+[core]
+    editor = nvim
+
+[diff]
+    tool = nvimdiff
+
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""

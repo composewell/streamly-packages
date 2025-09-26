@@ -101,6 +101,7 @@ in {
 #------------------------------------------------------------------------------
 #  nvim with plugins
 #------------------------------------------------------------------------------
+
 nvimCustom = nixpkgs.neovim.override {
     configure = {
       customRC =
@@ -116,34 +117,19 @@ nvimCustom = nixpkgs.neovim.override {
 #------------------------------------------------------------------------------
 # bashrc
 #------------------------------------------------------------------------------
-bashrc = writeShellScriptTo "bashrc_vim" "/etc/bashrc.d/01_vim"
-''
-alias vi='nvim'
-alias vim='nvim'
-alias vimdiff='nvim -d'
-'';
+
+bashrc = writeShellScriptTo "bashrc_vim" "/etc/bashrc.d/01_vim" (builtins.readFile ./bashrc);
 
 #------------------------------------------------------------------------------
 # gitconfig
 #------------------------------------------------------------------------------
+
 gitconfig =
-let gitCfg =
-''
-# vim: ft=gitconfig
-
-[core]
-    editor = nvim
-
-[diff]
-    tool = nvimdiff
-
-[difftool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-'';
-in nixpkgs.writeTextFile {
-    name = "gitconfig-vim";
-    text = gitCfg;
-    executable = false;
-    destination = "/etc/gitconfig.vim";
-};
+  let gitCfg = builtins.readFile ./gitconfig;
+  in nixpkgs.writeTextFile {
+      name = "gitconfig-vim";
+      text = gitCfg;
+      executable = false;
+      destination = "/etc/gitconfig.vim";
+  };
 }
