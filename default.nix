@@ -14,8 +14,9 @@ let
     # use https://channels.nixos.org/nixpkgs-25.05-darwin/git-revision
     then "c3d456aad3a84fcd76b4bebf8b48be169fc45c31"
     # use https://channels.nixos.org/nixpkgs-25.05/git-revision
-    else "b2a3852bd078e68dd2b3dfa8c00c67af1f0a7d20";
+    #else "b2a3852bd078e68dd2b3dfa8c00c67af1f0a7d20";
     #else "50ab793786d9de88ee30ec4e4c24fb4236fc2674"; # nixpkgs 24.11
+    else "branch-off-24.11"; # nixpkgs 24.11
 in
   builtins.fetchTarball {
     url = "https://github.com/NixOS/nixpkgs/archive/${commit}.tar.gz";
@@ -59,7 +60,7 @@ let
 #------------------------------------------------------------------------------
 
 installedDeps =
-  with hpkgs;
+  with haskellPackages;
     [ # Streamly packages
       fusion-plugin
       streamly
@@ -88,26 +89,55 @@ installedDeps =
 #------------------------------------------------------------------------------
 
 haskellPackages =
-  (import ./nix/haskellPackages.nix)
-    { inherit nixpkgs;
-      inherit compiler;
+let
+    utils = (import ./nix/utils.nix) { inherit nixpkgs; };
+
+    sources = import ./nix/haskellPackages.nix;
+
+    hpkgs =
+        if compiler == "default"
+        then nixpkgs.haskellPackages
+        else nixpkgs.haskell.packages.${compiler};
+
+    #recompile = pkg:
+    #    pkg.overrideAttrs (oldAttrs:
+    #      { doCheck = false;
+    #        #doHaddock = false;
+    #        configureFlags =
+    #          oldAttrs.configureFlags ++ ["--disable-tests"];
+    #      });
+
+    makeOverrides = utils: super: sources:
+      builtins.mapAttrs (name: spec:
+        if spec.type == "hackage" then
+          utils.hackage super name spec.version spec.sha256
+        else if spec.type == "github" then
+          utils.github super "${spec.owner}/${spec.repo}" spec.rev
+        else
+          throw "Unknown package source type: ${spec.type}"
+      ) sources;
+
+in
+    hpkgs.override {
+      overrides = self: super:
+        makeOverrides utils super sources;
     };
 
 #------------------------------------------------------------------------------
 # TODO
 #------------------------------------------------------------------------------
 
-hpkgs =
-  haskellPackages.override (old: {
-    overrides =
-      nixpkgs.lib.composeExtensions
-        (old.overrides or (_: _: {}))
-        (with nixpkgs.haskell.lib; self: super: {
-          # Add local packages here
-          # XXX Uses src = null, need to fix
-          #streamly = local super "streamly" ./. flags inShell;
-        });
-  });
+#haskellPackages1 =
+#  haskellPackages.override (old: {
+#    overrides =
+#      nixpkgs.lib.composeExtensions
+#        (old.overrides or (_: _: {}))
+#        (with nixpkgs.haskell.lib; self: super: {
+#          # Add local packages here
+#          # XXX Uses src = null, need to fix
+#          #streamly = local super "streamly" ./. flags inShell;
+#        });
+#  });
 
 #------------------------------------------------------------------------------
 # Vim editor configuration
@@ -159,7 +189,7 @@ otherPackages =
         [ #nixpkgs.pkgs.hlint
           #nixpkgs.haskellPackages.fourmolu
           #nixpkgs.pkgs.ghcid
-          hpkgs.haskell-language-server
+          haskellPackages.haskell-language-server
         ] else []
       ) ++
       ( if (editors)
@@ -172,19 +202,19 @@ otherPackages =
 #------------------------------------------------------------------------------
 
 # A fake package to add some additional deps to the shell env
-additionalDeps = hpkgs.mkDerivation rec {
+additionalDeps = haskellPackages.mkDerivation rec {
     version = "0.1";
     pname   = "streamly-additional";
     license = "BSD-3-Clause";
 
     libraryHaskellDepends = installedDeps;
-    setupHaskellDepends = with hpkgs; [
+    setupHaskellDepends = with haskellPackages; [
       cabal-doctest
     ];
-    executableFrameworkDepends = with hpkgs;
+    executableFrameworkDepends = with haskellPackages;
       # XXX On macOS cabal2nix does not seem to generate a
       # dependency on Cocoa framework.
-      if builtins.currentSystem == "x86_64-darwin"
+      if builtins.match ".*darwin.*" builtins.currentSystem != null
       then [nixpkgs.darwin.apple_sdk.frameworks.Cocoa]
       else [];
 };
@@ -201,5 +231,5 @@ utils = (import ./nix/utils.nix) { inherit nixpkgs; };
 #------------------------------------------------------------------------------
 
 in if nixpkgs.lib.inNixShell
-   then utils.mkShell hpkgs (p: [additionalDeps]) otherPackages hoogle true
+   then utils.mkShell haskellPackages (p: [additionalDeps]) otherPackages hoogle true
    else abort "nix-shell only please!"
