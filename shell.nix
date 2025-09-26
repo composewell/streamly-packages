@@ -230,6 +230,4 @@ utils = (import ./nix/utils.nix) { inherit nixpkgs; };
 # packages.
 #------------------------------------------------------------------------------
 
-in if nixpkgs.lib.inNixShell
-   then utils.mkShell haskellPackages (p: [additionalDeps]) otherPackages hoogle true
-   else abort "nix-shell only please!"
+in utils.mkShell haskellPackages (p: [additionalDeps]) otherPackages hoogle true
