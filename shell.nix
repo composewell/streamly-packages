@@ -55,36 +55,6 @@ in
 let
 
 #------------------------------------------------------------------------------
-# Haskell libraries, packages pre-installed in the nix shell
-# Add or remove as you wish, any hackage package in nixpkgs set can be used.
-#------------------------------------------------------------------------------
-
-installedDeps =
-  with haskellPackages;
-    [ # Streamly packages
-      fusion-plugin
-      streamly
-      streamly-bytestring
-      streamly-core
-      streamly-coreutils
-      streamly-filepath
-      streamly-fsevents
-      streamly-process
-      streamly-statistics
-      streamly-text
-      #streamly-examples
-
-      ## Additional packages
-      ghczdecode
-
-      # For tests and benchmarks
-      hspec
-      tasty-bench
-      temporary
-      scientific
-    ];
-
-#------------------------------------------------------------------------------
 # The versions of Haskell packages used are defined in nix/haskellPackages.nix
 #------------------------------------------------------------------------------
 
@@ -172,7 +142,7 @@ additionalDeps = haskellPackages.mkDerivation rec {
     pname   = "streamly-additional";
     license = "BSD-3-Clause";
 
-    libraryHaskellDepends = installedDeps;
+    libraryHaskellDepends = otherPackages.libraries;
     setupHaskellDepends = with haskellPackages; [
       cabal-doctest
     ];
