@@ -6,9 +6,11 @@ with pkgs.vimPlugins; {
     # Async build
     neomake
 
-    # Appearance
+    # Appearance / colorschemes
     vim-airline
     vim-colors-solarized
+    gruvbox
+    nord-vim
     wombat256
     vim-indent-guides
 
@@ -49,7 +51,7 @@ with pkgs.vimPlugins; {
     vim-addon-nix
   ];
 
-  # Optional plugins: can be added using `:packadd $plugin-name`
+  # Optional plugins: loaded manually with :packadd
   opt = [
     delimitMate
     ultisnips
