@@ -46,12 +46,12 @@ in {
   #------------------------------------------------------------------------------
   # bashrc
   #------------------------------------------------------------------------------
-  bashrc =
-    writeShellScriptTo
-      "bashrc_vim" "/etc/bashrc.d/01_vim" (builtins.readFile ./bashrc);
+  #bashrc =
+  #  writeShellScriptTo
+  #    "bashrc_vim" "/etc/bashrc.d/01_vim" (builtins.readFile ./bashrc);
 
   #------------------------------------------------------------------------------
   # gitconfig
   #------------------------------------------------------------------------------
-  gitconfig = etcTextFile "gitconfig.vim" ./gitconfig;
+  #gitconfig = etcTextFile "gitconfig.vim" ./gitconfig;
 }
