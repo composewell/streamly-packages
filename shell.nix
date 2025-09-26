@@ -41,11 +41,11 @@ in
 , compiler ? "default"
 
 # To disable installation of editors: nix-shell --arg editors false
-, editors ? true
+#, editors ? true
 
 # To disable installation haskell tools (hls etc):
 # nix-shell --arg haskell-tools false
-, haskell-tools ? true
+#, haskell-tools ? true
 
 # To disable hoogle search engine database: nix-shell --arg hoogle false
 , hoogle ? true
@@ -155,24 +155,12 @@ vscodiumCfg = import ./vscodium.nix {inherit nixpkgs;};
 # other packages: haskell tools, editors, language server etc.
 #------------------------------------------------------------------------------
 
-otherPackages =
-    [ nixpkgs.pkgs.cabal-install
-      nixpkgs.pkgs.par                     # paragraph formatting for vim
-      nixpkgs.pkgs.powerline-fonts         # for vim status line
-      vimCfg.nvimCustom
-    ] ++
-      ( if (haskell-tools)
-        then
-        [ #nixpkgs.pkgs.hlint
-          #nixpkgs.haskellPackages.fourmolu
-          #nixpkgs.pkgs.ghcid
-          haskellPackages.haskell-language-server
-        ] else []
-      ) ++
-      ( if (editors)
-        then [ vscodiumCfg.vscodium ]
-        else []
-      );
+otherPackages = import ./packages.nix
+  { pkgs = nixpkgs.pkgs;
+    hpkgs = haskellPackages;
+    vim = vimCfg.nvimCustom;
+    vscodium = vscodiumCfg.vscodium;
+  };
 
 #------------------------------------------------------------------------------
 # Additional library, setup and executable dependencies
@@ -207,4 +195,4 @@ utils = (import ./nix/utils.nix) { inherit nixpkgs; };
 # packages.
 #------------------------------------------------------------------------------
 
-in utils.mkShell haskellPackages (p: [additionalDeps]) otherPackages hoogle true
+in utils.mkShell haskellPackages (p: [additionalDeps]) otherPackages.packages hoogle true
