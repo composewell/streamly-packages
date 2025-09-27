@@ -73,8 +73,11 @@ let
             else []);
         # Use a better prompt
         shellHook = ''
-          mkdir -p "$HOME/.config/streamly-packages"
-          export CABAL_DIR="$HOME/.config/streamly-packages"
+          #CFG_DIR="$HOME/.config/streamly-packages"
+          #CFG_FILE="$CFG_DIR/config.empty"
+          #mkdir -p "$CFG_DIR"
+          #export CABAL_DIR="$CFG_DIR"
+          export CABAL_CONFIG=/dev/null
           #This is commented for hls to work with VSCode
           #cabal user-config update -a "jobs: 1"
           export PS1="$PS1(haskell) "

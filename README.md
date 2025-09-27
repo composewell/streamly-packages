@@ -81,7 +81,8 @@ ghc-pkg list
 
 # Building a Haskell Package
 
-It does not depend on cabal to download and build the dependencies.  Do
+<!--
+We do not depend on cabal to download and build the dependencies.  Do
 not use `cabal update` to avoid building the dependencies.  Instead add
 your dependencies in [packages.nix](packages.nix), the dependencies are
 pre-installed in the shell from nixpkgs.
@@ -92,6 +93,12 @@ command then cabal may start building dependencies instead of using
 from nixpkgs. If you did not intend to do that then you can remove the
 hackage database index from `$HOME/.config/streamly-packages` or remove
 that entire directory itself.
+-->
+
+We do not depend on cabal to download and build the dependencies.
+Instead add your project dependencies in the library section of
+[packages.nix](packages.nix), any package specified here and all its
+dependencies are pre-installed in the shell from nixpkgs.
 
 For example to build the streamly-examples package:
 ```
