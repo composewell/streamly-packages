@@ -8,6 +8,10 @@
 ## Schemes
 ### standard:
 
+* wombat256
+* solarized
+* gruvbox
+
 * morning
 * zellner
 
