@@ -62,7 +62,7 @@ haskellPackages =
 let
     utils = (import ./nix/utils.nix) { inherit nixpkgs; };
 
-    sources = import ./nix/haskellPackages.nix;
+    sources = import ./haskell-sources.nix;
 
     hpkgs =
         if compiler == "default"
