@@ -14,7 +14,7 @@ box. Easily customizable to include any package from Hackage.
 * Vi editor `nvim`
 * Visual Studio Code editor `codium`
 
-Check the `nixpkgs` version used in the [default.nix](default.nix) file.
+The version of `nixpkgs` can be changed in the [shell.nix](shell.nix) file.
 
 Please refer to
 [this page](https://haskell-language-server.readthedocs.io/en/latest/features.html)
@@ -33,19 +33,19 @@ following command:
 nix-shell https://github.com/composewell/streamly-packages/archive/v0.1.4.tar.gz
 ```
 
-By default all optional features are installed. If it takes too long or
-uses too much disk space, you can pass arguments to the nix expression
-to customize install, for example:
+If it takes too long to build the hoogle file you can disable hoogle:
 
 ```
-nix-shell --arg haskell-tools false --arg hoogle false ...
+nix-shell --arg hoogle false ...
 ```
 
-Check out [default.nix](default.nix) for all available options.
+Use the cloning method if you would like to customize the environment
+before using. For example, if it is using too much space
+installing packages that you do not need.
 
 ## By cloning the github repo
 
-You can clone the `streamly-packages` repo and run the `nix-shell`
+You can clone the `streamly-packages` repo and run `nix-shell`
 command from the repo root directory.
 
 ```
@@ -54,20 +54,20 @@ cd streamly-packages
 nix-shell
 ```
 
-This is especially useful if you would like to customize the environment before
-using.
+You can comment out any packages you do not need in
+[packages.nix](packages.nix).
 
 # Using the Shell
 
 Once you are in the shell, you can use `ghc`, `cabal`, `nvim`, `codium`,
-`hoogle`, and other tools from the PATH. `ghc` will have streamly packages
-installed in its package database, ready to use.
+`hoogle`, and other CLI tools from the PATH. Essential streamly packages
+are pre-installed in the `ghc` package database, ready to use.
 
 To start with, you can try building and running the examples from the
 [streamly-examples](https://github.com/composewell/streamly-examples/tree/v0.3.0/examples)
 package.
 
-Alternatively, you can start the interactive repl `ghci` and run Haskell
+Alternatively, you can start the interactive repl `ghci` and play with Haskell
 code interactively.
 
 # Show installed packages
@@ -79,21 +79,44 @@ run the following command in the nix shell:
 ghc-pkg list
 ```
 
-# Updating package versions
+# Building a Haskell Package
 
-To update the versions of Haskell packages included, edit the
-[nix/haskellPackages.nix](nix/haskellPackages.nix) file to specify
+It does not depend on cabal to download and build the dependencies.  Do
+not use `cabal update` to avoid building the dependencies.  Instead add
+your dependencies in [packages.nix](packages.nix), the dependencies are
+pre-installed in the shell from nixpkgs.
+
+It uses `$HOME/.config/streamly-packages` as the CABAL_DIR to avoid
+building packages using cabal. If by mistake you run the `cabal update`
+command then cabal may start building dependencies instead of using
+from nixpkgs. If you did not intend to do that then you can remove the
+hackage database index from `$HOME/.config/streamly-packages` or remove
+that entire directory itself.
+
+For example to build the streamly-examples package:
+```
+git clone https://github.com/composewell/streamly-examples
+cd streamly-examples
+cabal build
+```
+
+# Overriding package versions
+
+To override or update the versions of Haskell packages used, edit the
+[haskell-sources.nix](haskell-sources.nix) file to specify
 particular git commit ids or package versions from hackage to be used.
 
+<!--
 Changing a package version may break other packages dependent on the changed
 package. If you do not need the broken packages you can comment those in
 [default.nix](default.nix). Otherwise change the versions of the broken
 packages as well accordingly.
+-->
 
 # Adding your own packages
 
 If you need any additional packages in this environment just add
-them to the list of packages in [default.nix](default.nix).
+them to the list of packages in [packages.nix](packages.nix).
 
 # Accessing the documentation
 
@@ -140,6 +163,8 @@ haskell language server with nvim:
 }
 ```
 
+To customize vim plugins edit the [vim/plugins.nix](vim/plugins.nix) file.
+
 # Using VSCode editor
 
 To run VSCodium, the open source version of Microsoft VSCode, run the
@@ -169,3 +194,5 @@ vscode app in `Downloads` folder:
 ```
 open ~/Downloads/Visual\ Studio\ Code.app
 ```
+
+To customize vscode extensions edit the [vscodium/extensions.nix](vscodium/extensions.nix) file.
