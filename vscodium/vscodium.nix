@@ -1,7 +1,7 @@
 { nixpkgs }:
 {
 vscodium =
-  let extsCfg = import ./vscodium/extensions.nix { exts = nixpkgs.pkgs.vscode-extensions; };
+  let extsCfg = import ./extensions.nix { exts = nixpkgs.pkgs.vscode-extensions; };
    in nixpkgs.pkgs.vscode-with-extensions.override
     { vscode = nixpkgs.pkgs.vscodium;
       vscodeExtensions =

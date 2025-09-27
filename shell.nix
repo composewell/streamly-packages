@@ -119,7 +119,7 @@ vimCfg = import nix/vim/vim.nix {nixpkgs = nixpkgs;};
 # VScode editor configuration
 #------------------------------------------------------------------------------
 
-vscodiumCfg = import ./vscodium.nix {inherit nixpkgs;};
+vscodiumCfg = import ./vscodium/vscodium.nix {inherit nixpkgs;};
 
 #------------------------------------------------------------------------------
 # other packages: haskell tools, editors, language server etc.
