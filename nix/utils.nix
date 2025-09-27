@@ -73,13 +73,11 @@ let
             else []);
         # Use a better prompt
         shellHook = ''
-          export CABAL_DIR="$(pwd)/.cabal.nix"
+          mkdir -p "$HOME/.config/streamly-packages"
+          export CABAL_DIR="$HOME/.config/streamly-packages"
           #This is commented for hls to work with VSCode
           #cabal user-config update -a "jobs: 1"
-          if test -n "$PS_SHELL"
-          then
-            export PS1="$PS_SHELL\[$bldred\](nix:streamly)\[$txtrst\] "
-          fi
+          export PS1="$PS1(haskell) "
         '';
     };
 
