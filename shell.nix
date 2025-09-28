@@ -82,20 +82,10 @@ let
     #          oldAttrs.configureFlags ++ ["--disable-tests"];
     #      });
 
-    makeOverrides = utils: super: sources:
-      builtins.mapAttrs (name: spec:
-        if spec.type == "hackage" then
-          utils.hackage super name spec.version spec.sha256
-        else if spec.type == "github" then
-          utils.github super "${spec.owner}/${spec.repo}" spec.rev
-        else
-          throw "Unknown package source type: ${spec.type}"
-      ) sources;
-
 in
     hpkgs.override {
       overrides = self: super:
-        makeOverrides utils super sources;
+        utils.makeOverrides super sources;
     };
 
 #------------------------------------------------------------------------------

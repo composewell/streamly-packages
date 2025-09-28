@@ -77,6 +77,16 @@ let
   github = super: pkg: rev:
     git super pkg "https://github.com/${pkg}.git" rev;
 
+  makeOverrides = super: sources:
+    builtins.mapAttrs (name: spec:
+      if spec.type == "hackage" then
+        hackage super name spec.version spec.sha256
+      else if spec.type == "github" then
+        github super "${spec.owner}/${spec.repo}" spec.rev
+      else
+        throw "Unknown package source type: ${spec.type}"
+    ) sources;
+
   mkShell = shellDrv: pkgs: otherPkgs: doHoogle: doBench:
     shellDrv.shellFor {
       packages = pkgs;
@@ -114,4 +124,5 @@ in
   inherit githubSubdir;
   inherit github;
   inherit mkShell;
+  inherit makeOverrides;
 }
