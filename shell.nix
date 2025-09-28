@@ -55,13 +55,18 @@ in
 let
 
 #------------------------------------------------------------------------------
+# Import nix utility functions
+#------------------------------------------------------------------------------
+
+system = builtins.currentSystem;
+utils = (import ./nix/utils.nix) { inherit nixpkgs; inherit system; };
+
+#------------------------------------------------------------------------------
 # The versions of Haskell packages used are defined in nix/haskellPackages.nix
 #------------------------------------------------------------------------------
 
 haskellPackages =
 let
-    utils = (import ./nix/utils.nix) { inherit nixpkgs; };
-
     sources = import ./haskell-sources.nix;
 
     hpkgs =
@@ -149,16 +154,10 @@ additionalDeps = haskellPackages.mkDerivation rec {
     executableFrameworkDepends = with haskellPackages;
       # XXX On macOS cabal2nix does not seem to generate a
       # dependency on Cocoa framework.
-      if builtins.match ".*darwin.*" builtins.currentSystem != null
+      if builtins.match ".*darwin.*" system != null
       then [nixpkgs.darwin.apple_sdk.frameworks.Cocoa]
       else [];
 };
-
-#------------------------------------------------------------------------------
-# Import nix utility functions
-#------------------------------------------------------------------------------
-
-utils = (import ./nix/utils.nix) { inherit nixpkgs; };
 
 #------------------------------------------------------------------------------
 # Define the nix shell using haskell packages, additional deps and other

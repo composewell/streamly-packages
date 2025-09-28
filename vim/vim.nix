@@ -1,7 +1,6 @@
 # Copyright (c) 2022 Composewell Technologies
 
 { nixpkgs }:
-with import ../utils.nix { inherit nixpkgs; };
 
 let
   # Load plugins from a separate file
