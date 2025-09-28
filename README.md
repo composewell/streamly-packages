@@ -5,14 +5,14 @@ Haskell Streamly and its ecosystem packages installed out of the
 box. Easily customizable to include any package from Hackage.
 **Includes:**
 
-* Haskell compiler - `ghc`
-* Haskell project build tool - `cabal`
+* `nvim`: Stylish Vim IDE with plugins
+* `codium`: Visual Studio Code with extensions
+* `ghc`: the Haskell compiler
+* `cabal`: the Haskell project build tool
+* HLS: the Haskell language server
+* Hoogle server for searchable documentation
+* Essential Haskell development tools
 * Streamly ecosystem libraries
-* Hoogle server for documentation
-* Haskell language server (HLS)
-* A few other Haskell dev tools
-* Vi editor `nvim`
-* Visual Studio Code editor `codium`
 
 The version of `nixpkgs` can be changed in the [shell.nix](shell.nix) file.
 
