@@ -1,13 +1,12 @@
 # Copyright   : (c) 2022 Composewell Technologies
 { nixpkgs, system }:
-with
-    (import ./make-overrides.nix)
-      {
-        inherit nixpkgs;
-        inherit system;
-      };
-
 let
+  # XXX we should move this to packages.nix
+  cocoa = if builtins.match ".*darwin.*" system != null then
+    [ nixpkgs.darwin.apple_sdk.frameworks.Cocoa ]
+  else
+    [ ];
+
   mkShell = shellDrv: pkgs: otherPkgs: doHoogle: doBench:
     shellDrv.shellFor {
       packages = pkgs;

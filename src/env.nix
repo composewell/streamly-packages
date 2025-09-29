@@ -9,6 +9,7 @@ let
   utils1 = (import ./make-overrides.nix) {
     inherit nixpkgs;
     inherit system;
+    withHaddock = hoogle;
   };
 
   haskellPackagesOrig = if compiler == "default" then

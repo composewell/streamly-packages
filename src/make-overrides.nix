@@ -1,15 +1,14 @@
 # Copyright   : (c) 2022 Composewell Technologies
 # For faster build using less space we disable profiling
 # XXX pass profiling as an option
-{ nixpkgs, system }:
+{ nixpkgs, system, withHaddock }:
+with
+    (import ./utils.nix)
+      {
+        inherit nixpkgs;
+        inherit system;
+      };
 let
-  withHaddock = true;
-
-  cocoa = if builtins.match ".*darwin.*" system != null then
-    [ nixpkgs.darwin.apple_sdk.frameworks.Cocoa ]
-  else
-    [ ];
-
   disableProfiling = pkg:
     nixpkgs.haskell.lib.overrideCabal pkg
     (old: { enableLibraryProfiling = false; });
