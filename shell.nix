@@ -59,8 +59,8 @@ let
 #------------------------------------------------------------------------------
 
 system = builtins.currentSystem;
-utils = (import ./nix/utils.nix) { inherit nixpkgs; inherit system; };
-utils1 = (import ./nix/make-overrides.nix) { inherit nixpkgs; inherit system; };
+utils = (import ./src/utils.nix) { inherit nixpkgs; inherit system; };
+utils1 = (import ./src/make-overrides.nix) { inherit nixpkgs; inherit system; };
 
 #------------------------------------------------------------------------------
 # The versions of Haskell packages used are defined in nix/haskellPackages.nix
