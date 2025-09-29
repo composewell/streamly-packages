@@ -41,23 +41,9 @@ let
         value = doJailbreak super.${name};
       }) sources.jailbreaks));
 
-#------------------------------------------------------------------------------
-# Vim editor configuration
-#------------------------------------------------------------------------------
-
-  vimCfg = import ../vim/vim.nix {nixpkgs = nixpkgs;};
-
-#------------------------------------------------------------------------------
-# VScode editor configuration
-#------------------------------------------------------------------------------
-
-  vscodiumCfg = import ../vscodium/vscodium.nix {inherit nixpkgs;};
-
   requiredPackages = import ../packages.nix
-    { pkgs = nixpkgs.pkgs;
+    { inherit nixpkgs;
       hpkgs = haskellPackages;
-      vim = vimCfg.nvimCustom;
-      vscodium = vscodiumCfg.vscodium;
     };
 
   # A fake package to add some additional deps to the shell env

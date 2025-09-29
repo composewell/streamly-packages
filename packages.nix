@@ -1,11 +1,15 @@
-{pkgs, hpkgs, vim, vscodium}:
+{nixpkgs, hpkgs }:
+let
+  pkgs = nixpkgs.pkgs;
+  editors = (import ./src/editors.nix) {nixpkgs = nixpkgs;};
+in
 {
 packages =
     [ # Editors
-      vim
+      editors.vim
       pkgs.par                     # paragraph formatting for vim
       pkgs.powerline-fonts         # for vim status line
-      vscodium
+      editors.vscodium
 
       # Haskell tools
       # From nixpkgs.pkgs
