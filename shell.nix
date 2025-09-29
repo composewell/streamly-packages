@@ -53,4 +53,4 @@ env = import ./src/env.nix {
             inherit system;
             inherit hoogle;
           };
-in env
+in env.shell

@@ -61,4 +61,7 @@ let
 
   shell = utils.mkShell haskellPackages (p: [ additionalDeps ]) requiredPackages.packages hoogle true;
 
-in shell
+in {
+  inherit shell;
+  inherit haskellPackages;
+}
