@@ -1,6 +1,6 @@
 # Package sources to override the nixpkgs package set.
 # You can add packages from hackage or github.
-with import ./src/declare-sources.nix;
+with import ./src/sources.nix;
 let
   composewell = repo: rev:
     github "composewell" repo rev;
