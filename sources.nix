@@ -40,4 +40,6 @@ layer2 =
 layer3 = {
 };
 
+jailbreaks = [];
+
 }

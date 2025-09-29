@@ -31,7 +31,14 @@ let
   in hpkgs.extend overrides;
 
   haskellPackages =
-    layer3 (layer2 layer1);
+    let p = layer3 (layer2 layer1);
+    in
+      p.extend (self: super:
+      with nixpkgs.haskell.lib;
+      builtins.listToAttrs (map (name: {
+        inherit name;
+        value = doJailbreak super.${name};
+      }) sources.jailbreaks));
 
 #------------------------------------------------------------------------------
 # Vim editor configuration
