@@ -29,6 +29,7 @@ in
 
 {
   config.allowUnfree = true; # Allow unfree packages for some vscode extensions
+  config.allowBroken = true;
 }
 
 #------------------------------------------------------------------------------
@@ -38,7 +39,7 @@ in
 # CAUTION! a spelling mistake in an arg string is ignored silently.
 
 # To use a specific ghc version: nix-shell --argstr compiler "ghc966"
-, compiler ? "default"
+, compiler ? "ghc96"
 
 # To disable hoogle search engine database: nix-shell --arg hoogle false
 , hoogle ? true
