@@ -27,6 +27,10 @@ let
         #This is commented for hls to work with VSCode
         #cabal user-config update -a "jobs: 1"
         export PS1="$PS1(haskell) "
+        #if test -n "$PS_SHELL"
+        #then
+        #  export PS1="$PS_SHELL\[$bldred\](nix:cw)\[$txtrst\] "
+        #fi
       '';
     };
 
