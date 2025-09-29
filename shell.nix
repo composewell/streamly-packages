@@ -68,7 +68,7 @@ utils1 = (import ./src/make-overrides.nix) { inherit nixpkgs; inherit system; };
 
 haskellPackages =
 let
-    sources = import ./haskell-sources.nix;
+    sources = import ./sources.nix;
 
     hpkgs =
         if compiler == "default"

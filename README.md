@@ -110,7 +110,7 @@ cabal build
 # Overriding package versions
 
 To override or update the versions of Haskell packages used, edit the
-[haskell-sources.nix](haskell-sources.nix) file to specify
+[sources.nix](sources.nix) file to specify
 particular git commit ids or package versions from hackage to be used.
 
 <!--
