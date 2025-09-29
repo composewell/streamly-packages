@@ -18,11 +18,20 @@ let
 
   sources = import ../sources.nix;
 
-haskellPackages =
-    haskellPackagesOrig.override {
-      overrides = self: super:
-        utils1.makeOverrides super sources;
-    };
+  layer1 = let
+    overrides = self: super: utils1.makeOverrides super sources.layer1;
+    in haskellPackagesOrig.extend overrides;
+
+  layer2 = hpkgs: let
+    overrides = self: super: utils1.makeOverrides super sources.layer2;
+    in hpkgs.extend overrides;
+
+  layer3 = hpkgs: let
+    overrides = self: super: utils1.makeOverrides super sources.layer3;
+  in hpkgs.extend overrides;
+
+  haskellPackages =
+    layer3 (layer2 layer1);
 
 #------------------------------------------------------------------------------
 # Vim editor configuration
