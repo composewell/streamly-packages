@@ -1,24 +1,9 @@
 # Package sources to override the nixpkgs package set.
 # You can add packages from hackage or github.
+with import ./nix/declare-sources.nix;
 let
-  hackage = version: sha256: {
-    type = "hackage";
-    inherit version sha256;
-  };
-
-  github = owner: repo: rev: {
-    type = "github";
-    inherit owner repo rev;
-  };
-
-  composewell = repo: rev: {
-    type = "github";
-    owner = "composewell";
-    inherit repo rev;
-  };
-
-  # XXX need github subdir specification as well
-
+  composewell = repo: rev:
+    github "composewell" repo rev;
 in
 {
   # Overrides from hackage

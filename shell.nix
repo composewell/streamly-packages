@@ -60,6 +60,7 @@ let
 
 system = builtins.currentSystem;
 utils = (import ./nix/utils.nix) { inherit nixpkgs; inherit system; };
+utils1 = (import ./nix/make-overrides.nix) { inherit nixpkgs; inherit system; };
 
 #------------------------------------------------------------------------------
 # The versions of Haskell packages used are defined in nix/haskellPackages.nix
@@ -85,7 +86,7 @@ let
 in
     hpkgs.override {
       overrides = self: super:
-        utils.makeOverrides super sources;
+        utils1.makeOverrides super sources;
     };
 
 #------------------------------------------------------------------------------
@@ -141,12 +142,9 @@ additionalDeps = haskellPackages.mkDerivation rec {
     setupHaskellDepends = with haskellPackages; [
       cabal-doctest
     ];
-    executableFrameworkDepends = with haskellPackages;
-      # XXX On macOS cabal2nix does not seem to generate a
-      # dependency on Cocoa framework.
-      if builtins.match ".*darwin.*" system != null
-      then [nixpkgs.darwin.apple_sdk.frameworks.Cocoa]
-      else [];
+    # XXX On macOS cabal2nix does not seem to generate a
+    # dependency on Cocoa framework.
+    executableFrameworkDepends = utils.cocoa;
 };
 
 #------------------------------------------------------------------------------

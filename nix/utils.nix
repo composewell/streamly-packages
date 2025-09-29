@@ -1,92 +1,13 @@
 # Copyright   : (c) 2022 Composewell Technologies
-# For faster build using less space we disable profiling
-# XXX pass profiling as an option
 { nixpkgs, system }:
-let
-  withHaddock = true;
-
-  disableProfiling = pkg:
-    nixpkgs.haskell.lib.overrideCabal pkg
-    (old: { enableLibraryProfiling = false; });
-
-  hackageWith = super: pkg: ver: sha256: prof:
-    nixpkgs.haskell.lib.overrideCabal
-      (super.callHackageDirect
-        { pkg = pkg;
-          ver = ver;
-          sha256 = sha256;
-        } {})
-      (old:
-        { enableLibraryProfiling = prof;
-          doHaddock = withHaddock;
-          doCheck = false;
-        });
-
-  hackageProf = super: pkg: ver: sha256:
-    hackageWith super pkg ver sha256 true;
-
-  hackage = super: pkg: ver: sha256:
-    hackageWith super pkg ver sha256 false;
-
-  # we can possibly avoid adding our package to HaskellPackages like
-  # in the case of nix-shell for a single package?
-  local = super: pkg: path: opts: inShell:
-    let orig = super.callCabal2nixWithOptions pkg path opts { };
-    in if inShell
-    # Avoid copying the source directory to nix store by using
-    # src = null.
-    then
-      orig.overrideAttrs (oldAttrs: { src = null; })
-    else
-      orig;
-
-  additionalInputs = if system == "x86_64-darwin" then
-    [ nixpkgs.darwin.apple_sdk.frameworks.Cocoa ]
-  else
-    [ ];
-
-  gitBranchDirFlags = super: pkg: url: rev: branch: subdir: flags:
-    nixpkgs.haskell.lib.overrideCabal (let
-      src = fetchGit {
-        url = url;
-        rev = rev;
-        ref = branch;
+with
+    (import ./make-overrides.nix)
+      {
+        inherit nixpkgs;
+        inherit system;
       };
-    in super.callCabal2nix pkg "${src}${subdir}" { }) (old: {
-      librarySystemDepends = additionalInputs;
-      enableLibraryProfiling = false;
-      doHaddock = withHaddock;
-      doCheck = false;
-      configureFlags = flags;
-    });
 
-    gitSubdirFlags = super: pkg: url: rev: subdir: flags:
-      gitBranchDirFlags super pkg url rev "master" subdir flags;
-
-    gitSubdir = super: pkg: url: rev: subdir:
-      gitSubdirFlags super pkg url rev subdir [];
-
-  gitBranch = super: pkg: url: rev: branch:
-    gitBranchDirFlags super pkg url rev branch "" [ ];
-
-  git = super: pkg: url: rev: gitSubdir super pkg url rev "";
-
-  githubSubdir = super: pkg: rev: subdir:
-    gitSubdir super pkg "https://github.com/${pkg}.git" rev subdir;
-
-  github = super: pkg: rev:
-    git super pkg "https://github.com/${pkg}.git" rev;
-
-  makeOverrides = super: sources:
-    builtins.mapAttrs (name: spec:
-      if spec.type == "hackage" then
-        hackage super name spec.version spec.sha256
-      else if spec.type == "github" then
-        github super "${spec.owner}/${spec.repo}" spec.rev
-      else
-        throw "Unknown package source type: ${spec.type}"
-    ) sources;
-
+let
   mkShell = shellDrv: pkgs: otherPkgs: doHoogle: doBench:
     shellDrv.shellFor {
       packages = pkgs;
@@ -96,7 +17,7 @@ let
       doBenchmark = doBench;
       # XXX On macOS cabal2nix does not seem to generate a dependency on
       # Cocoa framework.
-      buildInputs = otherPkgs ++ additionalInputs;
+      buildInputs = otherPkgs ++ cocoa;
       # Use a better prompt
       shellHook = ''
         #CFG_DIR="$HOME/.config/streamly-packages"
@@ -112,17 +33,6 @@ let
 
 in
 {
-  inherit disableProfiling;
-  inherit hackage;
-  inherit hackageProf;
-  inherit local;
-  inherit gitBranchDirFlags;
-  inherit gitSubdirFlags;
-  inherit gitSubdir;
-  inherit gitBranch;
-  inherit git;
-  inherit githubSubdir;
-  inherit github;
   inherit mkShell;
-  inherit makeOverrides;
+  inherit cocoa;
 }
