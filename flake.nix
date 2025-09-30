@@ -1,12 +1,22 @@
 {
   description = "Development Environment";
 
-  inputs = { nixpkgs.url = "github:NixOS/nixpkgs/branch-off-24.11"; };
+  inputs = {
+    # nixpkgs-linux.url = "github:NixOS/nixpkgs/branch-off-24.11";
+    nixpkgs-linux.url = "github:NixOS/nixpkgs/b2a3852bd078e68dd2b3dfa8c00c67af1f0a7d20"; # nixpkgs-25.05
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/c3d456aad3a84fcd76b4bebf8b48be169fc45c31"; # nixpkgs-25.05-darwin
+  };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs-linux, nixpkgs-darwin }:
 
     let
-      systems = [ "x86_64-linux" "x86_64-darwin" ];
+
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
 
       # TODO: Move this as a lower level helper module
       forAllSystems = f:
@@ -17,6 +27,10 @@
 
       mkEnv = system:
         let
+          nixpkgs =
+            if builtins.match ".*darwin.*" system != null
+            then nixpkgs-darwin
+            else nixpkgs-linux;
           pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true;

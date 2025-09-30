@@ -13,6 +13,8 @@ let
     if builtins.match ".*darwin.*" builtins.currentSystem != null
     # use https://channels.nixos.org/nixpkgs-25.05-darwin/git-revision
     then "c3d456aad3a84fcd76b4bebf8b48be169fc45c31"
+    #stan fails to build for macOS on this one
+    #then "branch-off-24.11" # nixpkgs 24.11
     # use https://channels.nixos.org/nixpkgs-25.05/git-revision
     #else "b2a3852bd078e68dd2b3dfa8c00c67af1f0a7d20";
     #else "50ab793786d9de88ee30ec4e4c24fb4236fc2674"; # nixpkgs 24.11
