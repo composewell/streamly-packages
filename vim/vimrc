@@ -159,9 +159,10 @@ endif
 
 " Colors and Fonts {{{
 
-if has("termguicolors")
-  set termguicolors
-endif
+" this results in horrible colorschemes on macos
+"if has("termguicolors")
+"  set termguicolors
+"endif
 
 " See :h coc-highlights
 " See https://github.com/vim-scripts/wombat256.vim/blob/master/colors/wombat256mod.vim
