@@ -30,6 +30,11 @@ nmap ,zR zR:wincmd W<CR>zR:wincmd W<CR>
 "augroup END
 " }}}
 " Appearance {{{
+" Fix redraw issue on scrolling when in tmux.
+" See https://sunaku.github.io/vim-256color-bce.html
+if &term =~ '256color'
+    set t_ut=
+endif
 
 " Set color column before the color scheme for the scheme color to take effect.
 hi ColorColumn ctermbg=8
@@ -58,12 +63,12 @@ let g:haskell_indent_disable = 1
 
 " }}}
 " Indentation {{{
-"let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_enable_on_vim_startup = 1
 let indent_guides_guide_size = 0
 
 " reset guides on shiftwidth change
 " needs vim >= 7.4.786
-"autocmd OptionSet * call indent_guides#process_autocmds()
+autocmd OptionSet * call indent_guides#process_autocmds()
 
 " reset indent guides e.g. after changing shiftwidth
 nmap <Leader>ir :IndentGuidesToggle<CR>:IndentGuidesToggle<CR>
@@ -114,10 +119,11 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " autocmd VimEnter * nested :call tagbar#autoopen(1)
 "let g:tagbar_left = 1
 
-set tags+=codex.tags;/
-" set cscopeprg=hscope
-" set cscopetag
-" set cscopetagorder=1 " search tags first
+"set tags+=codex.tags;/
+" XXX cscopeprg and cscopetag options throw error in nixpkgs 23.11
+"set cscopeprg=hscope
+"set cscopetag
+"set cscopetagorder=1 " search tags first
 
 "function! CsAddHscope()
 "  let db = findfile("hscope.out", ".;")
@@ -159,7 +165,7 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-" For newer version coc use:
+" For newer version of coc use:
 "inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 

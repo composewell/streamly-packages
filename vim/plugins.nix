@@ -58,6 +58,7 @@ with pkgs.vimPlugins; {
     #vim-instant-markdown' # , { 'for': 'markdown'} " markdown WYSIWYG in browser
     #diffchar causes random characters displayed very often - blacklisted
     #diffchar.vim
+    coc-clangd
   ];
 
   # Optional plugins: can be added using `:packadd $plugin-name`

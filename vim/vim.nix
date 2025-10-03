@@ -2,6 +2,7 @@
 
 { nixpkgs }:
 
+#with import ../utils.nix {nixpkgs = nixpkgs;};
 let
   # Load plugins from a separate file
   plugins = import ./plugins.nix { pkgs = nixpkgs.pkgs; };
@@ -45,6 +46,7 @@ in {
   #------------------------------------------------------------------------------
   # bashrc
   #------------------------------------------------------------------------------
+  # We source it in ~/.bashrc from "etc".
   #bashrc =
   #  writeShellScriptTo
   #    "bashrc_vim" "/etc/bashrc.d/01_vim" (builtins.readFile ./bashrc);
@@ -52,5 +54,6 @@ in {
   #------------------------------------------------------------------------------
   # gitconfig
   #------------------------------------------------------------------------------
-  #gitconfig = etcTextFile "gitconfig.vim" ./gitconfig;
+  # We source it in ~/.gitconfig from "etc".
+  gitconfig = etcTextFile "gitconfig.vim" ./gitconfig;
 }

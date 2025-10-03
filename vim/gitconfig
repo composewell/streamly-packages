@@ -7,4 +7,4 @@
     tool = nvimdiff
 
 [difftool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+    cmd = "nvim -d -c \"colorscheme default\" \"$LOCAL\" \"$REMOTE\""
