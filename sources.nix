@@ -1,16 +1,14 @@
+{nixpack}:
 # Package sources to override the nixpkgs package set.
-with import ./src/sources.nix;
-let
-  composewell = repo: rev:
-    github "composewell" repo rev;
-in
+with nixpack.sources;
 {
 
 # layer1 is overridden by layer2. layer1 contains packages from hackage
 # only. Usually newer versions of packages that are updated on hackage
 # but not yet made to nixpkgs release we are using.
 
-layer1 =
+layers = [
+
 {
   fusion-plugin        = hackage "0.2.7"  "sha256-+TuzCAzpTUrlXwldOiHi5ZL92ui7rTVb33iqF7o8xAI=";
   streamly             = hackage "0.11.0" "sha256-JMZAwJHqmDxN/CCDFhfuv77xmAx1JVhvYFDxMKyQoGk=";
@@ -23,23 +21,17 @@ layer1 =
   streamly-statistics  = hackage "0.2.0"  "sha256-mkr7a3UOCFQqCQl+FRUruPaX4LZtuQt32MW86emnCG4=";
   streamly-text        = hackage "0.1.0"  "sha256-p1gqMDVlqV1PheTzxc2qnh9RanGJLbt3IC4xnwFTlOg=";
 
-};
+}
 
-# These are packages that are used to override the packages in layer1
-# (hackage). Usually github locations of package versions not yet on
-# hackage. If we disable this layer we will be left with packages on
-# hackage only.
+# These are packages that are used to override the above packages in
+# the first layer (hackage). This contains github locations of package
+# versions not yet on hackage. If we comment out this layer we are left
+# with packages on hackage only.
 
-layer2 =
 {
   streamly-coreutils   = composewell "streamly-coreutils" "c42a623ca862df2355533df4dbac0e555f273f23";
-};
-
-# Overrides on top of layer2. Usually local packages.
-
-layer3 = {
-};
+}
+];
 
 jailbreaks = [];
-
 }

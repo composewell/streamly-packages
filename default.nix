@@ -1,5 +1,3 @@
-# Copyright : (c) 2022 Composewell Technologies
-
 {
 nixpkgs ? import
 
@@ -45,15 +43,22 @@ in
 
 # To disable hoogle search engine database: nix-shell --arg hoogle false
 , hoogle ? true
-
 }:
-
-let
-system = builtins.currentSystem;
-env = import ./src/env.nix {
-            inherit nixpkgs;
-            inherit compiler;
-            inherit system;
-            inherit hoogle;
-          };
-in env.shell
+let src =
+      builtins.fetchTarball {
+        url = "https://github.com/composewell/nixpack/archive/b3db598aa.tar.gz";
+      };
+    nixpack = import "${src}/nix";
+    env =
+      nixpack.mkEnv
+        { inherit nixpkgs;
+          name = "streamly-packages";
+          sources = import ./sources.nix {inherit nixpack;};
+          packages = import ./packages.nix;
+          inherit compiler;
+          inherit hoogle;
+          isDev = true;
+        };
+in if nixpkgs.lib.inNixShell
+   then env.shell
+   else env.env

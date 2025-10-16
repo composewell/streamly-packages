@@ -1,5 +1,37 @@
 {
   "nodes": {
+    "nixpack": {
+      "locked": {
+        "lastModified": 1760527026,
+        "narHash": "sha256-bReuILGJpLY/wEIRW5Z0mSj0KpYHZ8G6xaCzYzWDuX8=",
+        "owner": "composewell",
+        "repo": "nixpack",
+        "rev": "ad487df8591329ef76ce38b3d0fcf7236991a963",
+        "type": "github"
+      },
+      "original": {
+        "owner": "composewell",
+        "repo": "nixpack",
+        "rev": "ad487df8591329ef76ce38b3d0fcf7236991a963",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1731603435,
+        "narHash": "sha256-CqCX4JG7UiHvkrBTpYC3wcEurvbtTADLbo3Ns2CEoL8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "8b27c1239e5c421a2bbc2c65d52e4a6fbf2ff296",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "branch-off-24.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-darwin": {
       "locked": {
         "lastModified": 1758397774,
@@ -16,26 +48,11 @@
         "type": "github"
       }
     },
-    "nixpkgs-linux": {
-      "locked": {
-        "lastModified": 1758346548,
-        "narHash": "sha256-afXE7AJ7MY6wY1pg/Y6UPHNYPy5GtUKeBkrZZ/gC71E=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b2a3852bd078e68dd2b3dfa8c00c67af1f0a7d20",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b2a3852bd078e68dd2b3dfa8c00c67af1f0a7d20",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
-        "nixpkgs-darwin": "nixpkgs-darwin",
-        "nixpkgs-linux": "nixpkgs-linux"
+        "nixpack": "nixpack",
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-darwin": "nixpkgs-darwin"
       }
     }
   },

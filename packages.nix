@@ -1,6 +1,7 @@
-{nixpkgs, hpkgs }:
+{nixpkgs}:
 let
   pkgs = nixpkgs.pkgs;
+  hpkgs = nixpkgs.haskellPackages;
   editors = (import ./src/editors.nix) {nixpkgs = nixpkgs;};
 in
 {
