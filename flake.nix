@@ -7,13 +7,14 @@
     #nixpkgs.url = "github:NixOS/nixpkgs/b2a3852bd078e68dd2b3dfa8c00c67af1f0a7d20"; # nixpkgs-25.05
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/c3d456aad3a84fcd76b4bebf8b48be169fc45c31"; # nixpkgs-25.05-darwin
     # For local testing use "path:.../nixpack";
-    nixpack.url = "github:composewell/nixpack/ad487df8591329ef76ce38b3d0fcf7236991a963";
+    nixpack.url = "github:composewell/nixpack/59fdf661cb2f7df0929f89818a9dfcf6c6c23a78";
   };
 
   outputs = { self, nixpkgs, nixpkgs-darwin, nixpack }:
     nixpack.flakeOutputs {
       inherit nixpkgs;
       inherit nixpkgs-darwin;
+      inherit nixpack;
       nixpkgsOptions = {
             config.allowUnfree = true;
             config.allowBroken = true;
