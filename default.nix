@@ -46,7 +46,7 @@ in
 }:
 let src =
       builtins.fetchTarball {
-        url = "https://github.com/composewell/nixpack/archive/b3db598aa.tar.gz";
+        url = "https://github.com/composewell/nixpack/archive/85e696d04ffdcc.tar.gz";
       };
     nixpack = import "${src}/nix";
     env =

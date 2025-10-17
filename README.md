@@ -14,7 +14,8 @@ box. Easily customizable to include any package from Hackage.
 * Essential Haskell development tools
 * Streamly ecosystem libraries
 
-The version of `nixpkgs` can be changed in the [shell.nix](shell.nix) file.
+The version of `nixpkgs` can be changed in the [default.nix](default.nix) or
+[flake.nix](flake.nix) files whichever you use.
 
 Please refer to
 [this page](https://haskell-language-server.readthedocs.io/en/latest/features.html)
@@ -30,7 +31,7 @@ To get a shell with the development environment installed in it, use the
 following command:
 
 ```
-nix-shell https://github.com/composewell/streamly-packages/archive/v0.1.4.tar.gz
+nix-shell https://github.com/composewell/streamly-packages/archive/master.tar.gz
 ```
 
 If it takes too long to build the hoogle file you can disable hoogle:
@@ -170,7 +171,9 @@ haskell language server with nvim:
 }
 ```
 
-To customize vim plugins edit the [vim/plugins.nix](vim/plugins.nix) file.
+To customize vim plugins see
+[nixpack-editors](https://github.com/composewell/nixpack-editors), fork
+and edit that repo and change its git URL in [packages.nix](package.nix).
 
 # Using VSCode editor
 
@@ -202,4 +205,6 @@ vscode app in `Downloads` folder:
 open ~/Downloads/Visual\ Studio\ Code.app
 ```
 
-To customize vscode extensions edit the [vscodium/extensions.nix](vscodium/extensions.nix) file.
+To customize vscode extensions see
+[nixpack-editors](https://github.com/composewell/nixpack-editors), fork
+and edit that repo and change its git URL in [packages.nix](package.nix).

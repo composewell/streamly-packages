@@ -2,15 +2,18 @@
 let
   pkgs = nixpkgs.pkgs;
   hpkgs = nixpkgs.haskellPackages;
-  editors = (import ./src/editors.nix) {nixpkgs = nixpkgs;};
+  src =
+      builtins.fetchTarball {
+        url = "https://github.com/composewell/nixpack-editors/archive/52728ddf3e9cf95429e48424f16cd4f7370d02a4.tar.gz";
+        sha256 = "sha256:0i1396px5vrs43c5p71xrxcknncw62ljp25lrjwrx0klcnsz1pj7";
+      };
+  editors = import "${src}/nix" {inherit nixpkgs;};
 in
 {
 packages =
     [ # Editors
-      editors.vim
-      pkgs.par                     # paragraph formatting for vim
-      pkgs.powerline-fonts         # for vim status line
-      editors.vscodium
+      editors.nvimWithConfig
+      editors.vscodiumWithConfig
 
       # Haskell tools
       # From nixpkgs.pkgs
