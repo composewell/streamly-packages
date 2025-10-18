@@ -23,7 +23,7 @@
             name = "composewell-env";
             sources = import ./sources.nix {inherit nixpack;};
             packages = import ./packages.nix;
-            compiler = "ghc96";
+            compiler = "default";
             hoogle = true;
             isDev = true;
       };

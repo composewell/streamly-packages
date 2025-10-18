@@ -38,8 +38,11 @@ in
 
 # CAUTION! a spelling mistake in an arg string is ignored silently.
 
+# We use the default compiler so that upon changing the nixpkgs channel we do
+# not have to recompile the compiler.
+
 # To use a specific ghc version: nix-shell --argstr compiler "ghc966"
-, compiler ? "ghc96"
+, compiler ? "default"
 
 # To disable hoogle search engine database: nix-shell --arg hoogle false
 , hoogle ? true
