@@ -25,7 +25,7 @@
             sources = import ./sources.nix {inherit nixpack;};
             packages = import ./packages.nix;
             compiler = "default";
-            hoogle = false;
+            hoogle = true;
             isDev = true;
       };
     } // { inherit nixpack;} ;
