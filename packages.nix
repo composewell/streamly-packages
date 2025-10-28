@@ -82,6 +82,6 @@ let streamly-packages = [
 
   in streamly-packages
     ++ other-packages
-    ++ composewell-packages
+    #++ composewell-packages
     ;
 }
