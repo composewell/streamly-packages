@@ -77,7 +77,6 @@ let streamly-packages = [
     markdown-doctest
     # haskell-perf
     # streamly-lz4
-    # streamly-relay
   ];
 
   in streamly-packages

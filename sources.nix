@@ -86,12 +86,6 @@ layers = [
 
   #streamly-metrics     = composewell "streamly-metrics"
   #                         "6080649563c6764f473e1279508506f91bb20b9f";
-
-  streamly-numeric     = composewell "streamly-numeric"
-                           "594821f8a725914817fec3a01d842ee17ac951f1";
-
-  #streamly-relay       = composewell "streamly-relay"
-  #                         "f615b7dcf5216bdc0abca4435b7f2e783543767f";
 }
 ];
 
