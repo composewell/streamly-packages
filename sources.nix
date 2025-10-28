@@ -1,6 +1,6 @@
 {nixpack}:
 # Package sources to override the nixpkgs package set.
-with nixpack.sources;
+with nixpack.mkSources;
 {
 
 # layer1 is overridden by layer2. layer1 contains packages from hackage

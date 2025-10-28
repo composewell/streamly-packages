@@ -8,11 +8,11 @@
     #nixpkgs.url = "github:NixOS/nixpkgs/branch-off-24.11";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/c3d456aad3a84fcd76b4bebf8b48be169fc45c31"; # nixpkgs-25.05-darwin
     # For local testing use "path:.../nixpack";
-    nixpack.url = "github:composewell/nixpack/e50da53dfcf24085fff75149a266646b28bd18fb";
+    nixpack.url = "github:composewell/nixpack/f3e431f9b9ca89ff3f4ce9d812675145b8120ad3";
   };
 
   outputs = { self, nixpkgs, nixpkgs-darwin, nixpack }:
-    nixpack.flakeOutputs {
+    nixpack.mkOutputs {
       inherit nixpkgs;
       inherit nixpkgs-darwin;
       inherit nixpack;
@@ -28,5 +28,5 @@
             hoogle = false;
             isDev = true;
       };
-    } // { inherit nixpack;} ;
+    };
 }
