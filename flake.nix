@@ -8,7 +8,7 @@
     #nixpkgs.url = "github:NixOS/nixpkgs/branch-off-24.11";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/c3d456aad3a84fcd76b4bebf8b48be169fc45c31"; # nixpkgs-25.05-darwin
     # For local testing use "path:.../nixpack";
-    nixpack.url = "github:composewell/nixpack/f3e431f9b9ca89ff3f4ce9d812675145b8120ad3";
+    nixpack.url = "github:composewell/nixpack/1e32d15f5e4903f5be5d05c429ee66dff9c8d1ee";
   };
 
   outputs = { self, nixpkgs, nixpkgs-darwin, nixpack }:

@@ -2,17 +2,17 @@
   "nodes": {
     "nixpack": {
       "locked": {
-        "lastModified": 1761670996,
-        "narHash": "sha256-EJXj4Rs132PrO4rgqgOijlr2bcMsJiRgMQV9AGTdJI4=",
+        "lastModified": 1761683471,
+        "narHash": "sha256-ekmJoqam0bIAeDeViIQ5WRyDAas6zF6ZuBXSgx89mQY=",
         "owner": "composewell",
         "repo": "nixpack",
-        "rev": "f3e431f9b9ca89ff3f4ce9d812675145b8120ad3",
+        "rev": "1e32d15f5e4903f5be5d05c429ee66dff9c8d1ee",
         "type": "github"
       },
       "original": {
         "owner": "composewell",
         "repo": "nixpack",
-        "rev": "f3e431f9b9ca89ff3f4ce9d812675145b8120ad3",
+        "rev": "1e32d15f5e4903f5be5d05c429ee66dff9c8d1ee",
         "type": "github"
       }
     },
