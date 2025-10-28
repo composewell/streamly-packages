@@ -9,14 +9,15 @@ nixpkgs ? import
 let
   commit =
     if builtins.match ".*darwin.*" builtins.currentSystem != null
-    # use https://channels.nixos.org/nixpkgs-25.05-darwin/git-revision
+    #see https://channels.nixos.org/nixpkgs-25.05-darwin/git-revision
     then "c3d456aad3a84fcd76b4bebf8b48be169fc45c31"
     #stan fails to build for macOS on this one
     #then "branch-off-24.11" # nixpkgs 24.11
-    # use https://channels.nixos.org/nixpkgs-25.05/git-revision
-    #else "b2a3852bd078e68dd2b3dfa8c00c67af1f0a7d20";
+    else "de69d2ba6c70e747320df9c096523b623d3a4c35"; # nixpkgs-unstable
+    #see https://channels.nixos.org/nixpkgs-25.05/git-revision
+    #else "b2a3852bd078e68dd2b3dfa8c00c67af1f0a7d20"; # nixpkgs 25.05
     #else "50ab793786d9de88ee30ec4e4c24fb4236fc2674"; # nixpkgs 24.11
-    else "branch-off-24.11"; # nixpkgs 24.11
+    #else "branch-off-24.11"; # nixpkgs 24.11
 in
   builtins.fetchTarball {
     url = "https://github.com/NixOS/nixpkgs/archive/${commit}.tar.gz";
@@ -49,7 +50,7 @@ in
 }:
 let src =
       builtins.fetchTarball {
-        url = "https://github.com/composewell/nixpack/archive/59fdf661cb2f7df0.tar.gz";
+        url = "https://github.com/composewell/nixpack/archive/e50da53dfcf24085fff75149a.tar.gz";
       };
     nixpack = import "${src}/nix";
 

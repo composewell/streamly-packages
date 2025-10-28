@@ -2,33 +2,33 @@
   "nodes": {
     "nixpack": {
       "locked": {
-        "lastModified": 1760712590,
-        "narHash": "sha256-vuRHeO3oK9R32fjhMUn72vLeVZzejZhqLvINkM2ASgs=",
+        "lastModified": 1761597511,
+        "narHash": "sha256-8c62+6zbf2mtx2ZGQ09JgkBXa9zNPUA7CT+tS173NR8=",
         "owner": "composewell",
         "repo": "nixpack",
-        "rev": "59fdf661cb2f7df0929f89818a9dfcf6c6c23a78",
+        "rev": "e50da53dfcf24085fff75149a266646b28bd18fb",
         "type": "github"
       },
       "original": {
         "owner": "composewell",
         "repo": "nixpack",
-        "rev": "59fdf661cb2f7df0929f89818a9dfcf6c6c23a78",
+        "rev": "e50da53dfcf24085fff75149a266646b28bd18fb",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1731603435,
-        "narHash": "sha256-CqCX4JG7UiHvkrBTpYC3wcEurvbtTADLbo3Ns2CEoL8=",
+        "lastModified": 1761440988,
+        "narHash": "sha256-2qsow3cQIgZB2g8Cy8cW+L9eXDHP6a1PsvOschk5y+E=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8b27c1239e5c421a2bbc2c65d52e4a6fbf2ff296",
+        "rev": "de69d2ba6c70e747320df9c096523b623d3a4c35",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "branch-off-24.11",
         "repo": "nixpkgs",
+        "rev": "de69d2ba6c70e747320df9c096523b623d3a4c35",
         "type": "github"
       }
     },

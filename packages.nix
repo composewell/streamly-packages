@@ -30,24 +30,58 @@ packages =
     ];
 
 libraries =
-  with hpkgs;
-    [ # Streamly packages
-      fusion-plugin
-      streamly
-      streamly-bytestring
-      streamly-core
-      streamly-coreutils
-      streamly-filepath
-      streamly-fsevents
-      streamly-process
-      streamly-statistics
-      streamly-text
-      #streamly-examples
+with nixpkgs.haskellPackages;
 
-      # For tests and benchmarks
-      hspec
-      tasty-bench
-      temporary
-      scientific
-    ];
+let streamly-packages = [
+    fusion-plugin
+    streamly-core
+    streamly
+
+    # dependent on streamly
+    streamly-bytestring
+    streamly-text
+    streamly-filepath
+
+    streamly-fsevents
+    streamly-examples
+    streamly-process
+    streamly-coreutils
+    streamly-statistics
+  ];
+
+  other-packages = [
+    # For tests and benchmarks
+    hspec
+    tasty-bench
+    temporary
+    scientific
+  ];
+
+  composewell-packages = [
+    # dependent on streamly-process
+    simple-rpc
+    simple-rpc-generate
+
+    packdiff
+
+    bench-show
+    # depends on streamly-coreutils, bench-show
+    bench-report
+
+    # depends on bench-report, on macOS fails with heap-overflow
+    # streaming-benchmarks
+
+    # dependent on streamly-process, streamly-coreutils, packdiff
+    relcheck
+
+    markdown-doctest
+    # haskell-perf
+    # streamly-lz4
+    # streamly-relay
+  ];
+
+  in streamly-packages
+    ++ other-packages
+    ++ composewell-packages
+    ;
 }
