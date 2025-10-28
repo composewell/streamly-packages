@@ -46,7 +46,7 @@ in
 , compiler ? "default"
 
 # To disable hoogle search engine database: nix-shell --arg hoogle false
-, hoogle ? true
+, hoogle ? false
 }:
 let src =
       builtins.fetchTarball {
