@@ -10,7 +10,7 @@ let
   commit =
     if builtins.match ".*darwin.*" builtins.currentSystem != null
     #see https://channels.nixos.org/nixpkgs-25.05-darwin/git-revision
-    then "c3d456aad3a84fcd76b4bebf8b48be169fc45c31"
+    then "08478b816182dc3cc208210b996294411690111d" # nixpkgs-25.05-darwin
     #stan fails to build for macOS on this one
     #then "branch-off-24.11" # nixpkgs 24.11
     else "de69d2ba6c70e747320df9c096523b623d3a4c35"; # nixpkgs-unstable
