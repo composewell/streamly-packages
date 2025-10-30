@@ -1,2 +1,2 @@
 let env = import ./common.nix {};
-in env.env
+in env.shell
