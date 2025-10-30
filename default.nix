@@ -46,28 +46,31 @@ in
 , compiler ? "default"
 
 # To disable hoogle search engine database: nix-shell --arg hoogle false
-, hoogle ? false
+, installHoogle ? false
 }:
 let src =
       builtins.fetchTarball {
-        url = "https://github.com/composewell/nixpack/archive/e50da53dfcf24085fff75149a.tar.gz";
+        url = "https://github.com/composewell/nixpack/archive/796a47f5d9abd9f66c9340e2b9ff9aeed2af1389.tar.gz";
       };
-    nixpack = import "${src}/nix";
+    basepkgs = import src;
 
     nixpkgs1 = nixpkgs.extend (self: super: {
-      nixpack = nixpack;
+      # XXX we may not needs this if we are passing basepkgs everywhere
+      nixpack = basepkgs.nixpack;
     });
 
     env =
-      nixpack.mkEnv
+      basepkgs.nixpack.mkEnv
         { nixpkgs = nixpkgs1;
-          name = "streamly-packages";
-          sources = import ./sources.nix {inherit nixpack;};
+          inherit basepkgs;
+          name = "composewell-packages";
+          sources = import ./sources.nix;
           packages = import ./packages.nix;
           inherit compiler;
-          inherit hoogle;
-          isDev = true;
+          inherit installHoogle;
+          #installDocs = false;
         };
-in if nixpkgs.lib.inNixShell
-   then env.shell
-   else env.env
+#in if nixpkgs.lib.inNixShell
+   #then env.shell
+   #else env.env
+in env.env

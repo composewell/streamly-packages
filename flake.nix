@@ -23,6 +23,6 @@
       sources = import ./sources.nix;
       packages = import ./packages.nix;
       #compiler = "default";
-      #hoogle = false;
+      #installHoogle = false;
     };
 }
