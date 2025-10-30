@@ -11,25 +11,18 @@
     #nixpkgs-darwin.url = "github:NixOS/nixpkgs/e99366c665bdd53b7b500ccdc5226675cfc51f45"; # nixpkgs-unstable
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/08478b816182dc3cc208210b996294411690111d"; # nixpkgs-25.05-darwin
     # For local testing use "path:.../nixpack";
-    nixpack.url = "github:composewell/nixpack/1e32d15f5e4903f5be5d05c429ee66dff9c8d1ee";
+    basepkgs.url = "github:composewell/nixpack/a2a724eab0a2d09dc19ef773c017678364632baa";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-darwin, nixpack }:
-    nixpack.mkOutputs {
+  outputs = { self, nixpkgs, nixpkgs-darwin, basepkgs }:
+    basepkgs.nixpack.mkOutputs {
       inherit nixpkgs;
       inherit nixpkgs-darwin;
-      inherit nixpack;
-      nixpkgsOptions = {
-            config.allowUnfree = true;
-            config.allowBroken = true;
-          };
-      envOptions = {
-            name = "composewell-env";
-            sources = import ./sources.nix {inherit nixpack;};
-            packages = import ./packages.nix;
-            compiler = "default";
-            hoogle = false;
-            isDev = true;
-      };
+      inherit basepkgs;
+      name = "composewell-env";
+      sources = import ./sources.nix;
+      packages = import ./packages.nix;
+      #compiler = "default";
+      #hoogle = false;
     };
 }
