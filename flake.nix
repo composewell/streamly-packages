@@ -11,7 +11,7 @@
     #nixpkgs-darwin.url = "github:NixOS/nixpkgs/e99366c665bdd53b7b500ccdc5226675cfc51f45"; # nixpkgs-unstable
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/08478b816182dc3cc208210b996294411690111d"; # nixpkgs-25.05-darwin
     # For local testing use "path:.../nixpack";
-    basepkgs.url = "github:composewell/nixpack/a2a724eab0a2d09dc19ef773c017678364632baa";
+    basepkgs.url = "github:composewell/nixpack/796a47f5d9abd9f66c9340e2b9ff9aeed2af1389";
   };
 
   outputs = { self, nixpkgs, nixpkgs-darwin, basepkgs }:
