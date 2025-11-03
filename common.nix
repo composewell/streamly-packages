@@ -40,7 +40,7 @@ in
 # CAUTION! a spelling mistake in an arg string is ignored silently.
 
 # We use the default compiler so that upon changing the nixpkgs channel we do
-# not have to recompile the compiler.
+# not have to recompile the packages.
 
 # To use a specific ghc version: nix-shell --argstr compiler "ghc966"
 , compiler ? "default"
