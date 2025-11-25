@@ -21,7 +21,8 @@ layers = [
   streamly-statistics  = hackage "0.2.0"  "sha256-mkr7a3UOCFQqCQl+FRUruPaX4LZtuQt32MW86emnCG4=";
   streamly-text        = hackage "0.1.0"  "sha256-p1gqMDVlqV1PheTzxc2qnh9RanGJLbt3IC4xnwFTlOg=";
 
-  unicode-data         = hackageProf "0.6.0" "sha256-gW1E5VFwZcUX5v1dvi3INDDqUuwCcOTjCR5+lOW3Obc==";
+  # This can force packages like pandoc to be rebuilt.
+  #unicode-data         = hackageProf "0.6.0" "sha256-gW1E5VFwZcUX5v1dvi3INDDqUuwCcOTjCR5+lOW3Obc==";
 }
 
 # These are packages that are used to override the above packages in
