@@ -31,11 +31,9 @@ layers = [
 # with packages on hackage only.
 
 {
-  # The build flag is unable to reduce the dependencies so we use a
-  # special branch.
-  bench-show           = composewellBranchFlags "bench-show"
-                           "a8dd27cde3783ef734f179568a2c8789be2489c4"
-                           "no-charts"
+  bench-show           = composewellOpts "bench-show"
+                           "422e88f8d96163992e849d40dcbbfdea00f61083"
+                           [ "--flag no-charts" ]
                            [ "--flags no-charts" ];
 
   streaming-benchmarks = composewell "streaming-benchmarks"
@@ -60,9 +58,10 @@ layers = [
   # Pre-release packages
   # ---------------------------------------------------------------
 
-  bench-report         = composewellFlags "bench-report"
+  bench-report         = composewellOpts "bench-report"
                            "4dad3ea916a950524bcfd5097fc6f0f63e645987"
-                           [ "--flags no-charts" ];
+                           [ "--flag no-charts" ]
+                           [ "--flag no-charts" ];
 
   #haskell-perf         = composewell "haskell-perf"
   #                         "c9b1357f7bbd7e3e71d30ed66a90beaa5e19ec36";

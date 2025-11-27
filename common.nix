@@ -5,6 +5,7 @@ nixpkgs ? import
 # Modify the commit in this line to change the nixpkgs version
 #------------------------------------------------------------------------------
 
+# IMPORTANT: if you change the commits, change in flake.nix as well.
 (
 let
   commit =
@@ -50,7 +51,7 @@ in
 }:
 let src =
       builtins.fetchTarball {
-        url = "https://github.com/composewell/nixpack/archive/796a47f5d9abd9f66c9340e2b9ff9aeed2af1389.tar.gz";
+        url = "https://github.com/composewell/nixpack/archive/659374e3c07a30d426fda1d74dfd75efc8fd2c18.tar.gz";
       };
     basepkgs = import src;
 
