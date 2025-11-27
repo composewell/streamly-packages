@@ -51,7 +51,7 @@ in
 }:
 let src =
       builtins.fetchTarball {
-        url = "https://github.com/composewell/nixpack/archive/659374e3c07a30d426fda1d74dfd75efc8fd2c18.tar.gz";
+        url = "https://github.com/composewell/nixpack/archive/b00feebadac4b09a4670c7d68a567dc957f6cb82.tar.gz";
       };
     basepkgs = import src;
 
