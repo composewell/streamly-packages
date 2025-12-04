@@ -49,14 +49,6 @@ let streamly-packages = [
     streamly-statistics
   ];
 
-  other-packages = [
-    # For tests and benchmarks
-    hspec
-    tasty-bench
-    temporary
-    scientific
-  ];
-
   composewell-packages = [
     # dependent on streamly-process
     simple-rpc
@@ -80,7 +72,7 @@ let streamly-packages = [
   ];
 
   in streamly-packages
-    ++ other-packages
     ++ composewell-packages
+    ++ [] # Add any other packages here
     ;
 }
