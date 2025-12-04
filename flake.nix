@@ -23,7 +23,10 @@
       name = "composewell-env";
       sources = import ./sources.nix;
       packages = import ./packages.nix;
+      # Use default to utilize the cache,
+      # specific compiler for reproducibility
       #compiler = "default";
       #installHoogle = false;
+      #installDocs = false;
     };
 }
