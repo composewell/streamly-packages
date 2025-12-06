@@ -40,10 +40,10 @@ layers = [
                            "3f24dfc7943faab4c183b88815968f56c36081ec";
 
   streamly             = composewell "streamly"
-                           "6a596733e1eb022d8b4134bd2b123cdcd4dc05e8";
+                           "fe0e27f6b6526ee1e0eb6630238d923de8036c8c";
 
   streamly-core        = composewellSubdir "streamly"
-                           "6a596733e1eb022d8b4134bd2b123cdcd4dc05e8" "/core";
+                           "fe0e27f6b6526ee1e0eb6630238d923de8036c8c" "/core";
 
   streamly-fsevents    = composewell "streamly-fsevents"
                            "fe2584e9502186090b1aee2671cca4bc14d7ad31";
@@ -59,7 +59,7 @@ layers = [
   # ---------------------------------------------------------------
 
   bench-report         = composewellOpts "bench-report"
-                           "4dad3ea916a950524bcfd5097fc6f0f63e645987"
+                           "26a70093f9da76144fefe9b5305b5f928ef59caf"
                            [ "--flag no-charts" ]
                            [ "--flag no-charts" ];
 
@@ -70,10 +70,10 @@ layers = [
                            "05dcf5f03128c49b66cf7c7778f567da1990014c";
 
   packdiff             = composewell "packdiff"
-                           "37bef504c07df43cb4745b1ddab5fcbfde8d310b";
+                           "6581cf29ff6ef1190bd7f1aec6ef081ad33f9519";
 
   relcheck             = composewell "relcheck"
-                           "cfd2b83e15d5a583876fff3eec43d01313219cde";
+                           "65a0d6a391617076e9e24fb300bd72df3323a263";
 
   simple-rpc           = composewellSubdir "simple-rpc"
                            "1559b75214e6fde7e10b20889aa1e66c12e641f0" "/rpc";
@@ -89,5 +89,15 @@ layers = [
 }
 ];
 
-jailbreaks = [];
+jailbreaks =
+  [ "streamly-bytestring"
+    "streamly-text"
+    "streamly-filepath"
+    "streamly-fsevents"
+    "streamly-process"
+    "streamly-statistics"
+    "streamly-coreutils"
+    "streamly-examples"
+    "packdiff"
+  ];
 }
