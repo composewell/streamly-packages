@@ -43,7 +43,7 @@ layers = [
                            "6a596733e1eb022d8b4134bd2b123cdcd4dc05e8";
 
   streamly-core        = composewellSubdir "streamly"
-                           "6a596733e1eb022d8b4134bd2b123cdcd4dc05e8" "/core";
+                           "6a596733e1eb022d8b4134bd2b123cdcd4dc05e8" "core";
 
   streamly-fsevents    = composewell "streamly-fsevents"
                            "fe2584e9502186090b1aee2671cca4bc14d7ad31";
@@ -76,10 +76,10 @@ layers = [
                            "cfd2b83e15d5a583876fff3eec43d01313219cde";
 
   simple-rpc           = composewellSubdir "simple-rpc"
-                           "1559b75214e6fde7e10b20889aa1e66c12e641f0" "/rpc";
+                           "1559b75214e6fde7e10b20889aa1e66c12e641f0" "rpc";
 
   simple-rpc-generate  = composewellSubdir "simple-rpc"
-                           "1559b75214e6fde7e10b20889aa1e66c12e641f0" "/generate";
+                           "1559b75214e6fde7e10b20889aa1e66c12e641f0" "generate";
 
   streamly-coreutils   = composewell "streamly-coreutils"
                            "fa180060c7510c89d2767980ca6f7ec7011d04b9";
