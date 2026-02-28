@@ -2,20 +2,14 @@
 let
   pkgs = nixpkgs.pkgs;
   hpkgs = nixpkgs.haskellPackages;
-  src =
-      builtins.fetchTarball {
-        url = "https://github.com/composewell/nixpack-editors/archive/c06b997ca7f1c1f2116557a330e0ed0e9b042cb1.tar.gz";
-        sha256 = "sha256:12gj4knx687sdbc1qwpvwgc6swab6y8nzabi083zjrgmb2dry519";
-      };
-  editors = import "${src}/nix" {inherit nixpkgs;};
 in
 {
 packages =
     [ # Editors
-      editors.nvimWithConfig
-      editors.vim_bashrc
-      editors.vim_gitconfig
-      editors.vscodiumWithConfig
+      hpkgs.nixpack-editors.nvimWithConfig
+      hpkgs.nixpack-editors.vim_bashrc
+      hpkgs.nixpack-editors.vim_gitconfig
+      hpkgs.nixpack-editors.vscodiumWithConfig
 
       # Haskell tools
       # From nixpkgs.pkgs

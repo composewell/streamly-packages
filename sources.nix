@@ -1,6 +1,11 @@
 {nixpack}:
 # Package sources to override the nixpkgs package set.
 with nixpack.mkSources;
+let
+  #localcp = path: local path // { build = "copy"; };
+  cwgh = repo: rev: gh "composewell" repo rev;
+  cwghim = repo: rev: cwgh repo rev // { build = "import"; };
+in
 {
 
 # layer1 is overridden by layer2. layer1 contains packages from hackage
@@ -31,6 +36,9 @@ layers = [
 # with packages on hackage only.
 
 {
+  nixpack-editors = cwghim "nixpack-editors"
+    "ce3dba744a9b27cd5ae966d5418b6ea56ee84957" // {subdir = "nix";};
+
   bench-show           = composewellOpts "bench-show"
                            "422e88f8d96163992e849d40dcbbfdea00f61083"
                            [ "--flag no-charts" ]
