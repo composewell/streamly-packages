@@ -2,17 +2,17 @@
   "nodes": {
     "basepkgs": {
       "locked": {
-        "lastModified": 1772224691,
-        "narHash": "sha256-pnRcs+X16HnmMm6kxfudKilgMEjz3V/6gdCB6nujqb0=",
+        "lastModified": 1772303801,
+        "narHash": "sha256-j9moYvoTbfOlbMS0+KmL71roy+r6Tm5WVF9OGxB9VmY=",
         "owner": "composewell",
         "repo": "nixpack",
-        "rev": "4c8816ac8a6e11e67f6b9b7b75a1e3837666ab7a",
+        "rev": "c5058ba175f78a510edcfc5ccf5806ab533cc1c5",
         "type": "github"
       },
       "original": {
         "owner": "composewell",
         "repo": "nixpack",
-        "rev": "4c8816ac8a6e11e67f6b9b7b75a1e3837666ab7a",
+        "rev": "c5058ba175f78a510edcfc5ccf5806ab533cc1c5",
         "type": "github"
       }
     },
