@@ -22,15 +22,9 @@ let
 
 # IMPORTANT: if you change the commits, change in flake.nix as well.
 
-# see https://channels.nixos.org/nixpkgs-25.05/git-revision
-nixpkgsRev = "de69d2ba6c70e747320df9c096523b623d3a4c35"; # nixpkgs-unstable
-# "b2a3852bd078e68dd2b3dfa8c00c67af1f0a7d20"; # nixpkgs 25.05
-# "50ab793786d9de88ee30ec4e4c24fb4236fc2674"; # nixpkgs 24.11
-# "branch-off-24.11"; # nixpkgs 24.11
-
-# see https://channels.nixos.org/nixpkgs-25.05-darwin/git-revision
-nixpkgsDarwinRev = "08478b816182dc3cc208210b996294411690111d"; # nixpkgs-25.05-darwin
-# stan fails to build for macOS on branch-off-24.11" # nixpkgs 24.11
+# see https://channels.nixos.org/nixos-unstable/git-revision
+nixpkgsRev = "6c9a78c09ff4d6c21d0319114873508a6ec01655"; # nixos-unstable
+nixpkgsDarwinRev = "6c9a78c09ff4d6c21d0319114873508a6ec01655"; # nixos-unstable
 
 nixpkgsOptions =
   {
@@ -42,7 +36,7 @@ nixpkgsOptions =
 # nixpack configuration
 #------------------------------------------------------------------------------
 
-packName = "nixpack-composewell";
+packName = "nixpack-composewell-open";
 packOptions =
   { inherit compiler;
     inherit installHoogle;
@@ -50,8 +44,7 @@ packOptions =
   };
 
 # https://github.com/composewell/nixpack repository revision.
-# IMPORTANT: also change the revision bin/nix-outdated-pack.sh
-nixpackRev = "c5058ba175f78a510edcfc5ccf5806ab533cc1c5";
+nixpackRev = "bebbfc11f153bf3a95c5b9dda4980bf47451bff2";
 
 #------------------------------------------------------------------------------
 # Anything after this is usually not to be changed

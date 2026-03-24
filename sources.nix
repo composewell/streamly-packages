@@ -37,7 +37,7 @@ layers = [
 
 {
   nixpack-editors = cwghim "nixpack-editors"
-    "ce3dba744a9b27cd5ae966d5418b6ea56ee84957" // {subdir = "nix";};
+    "956ec2027f101dee418060279810d76c936364b2" // {subdir = "nix";};
 
   bench-show           = composewellOpts "bench-show"
                            "422e88f8d96163992e849d40dcbbfdea00f61083"
