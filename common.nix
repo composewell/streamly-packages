@@ -44,14 +44,18 @@ packOptions =
   };
 
 # https://github.com/composewell/nixpack repository revision.
-nixpackRev = "bebbfc11f153bf3a95c5b9dda4980bf47451bff2";
+nixpackRev = "57811ee9a97c48b5ec84909bc137eb57361651b0";
 
 #------------------------------------------------------------------------------
 # Anything after this is usually not to be changed
 #------------------------------------------------------------------------------
 
 isDarwin = builtins.match ".*darwin.*" builtins.currentSystem != null;
-commit = if isDarwin then nixpkgsDarwinRev else nixpkgsRev;
+nixpkgsRev1 =
+  let rev = if isDarwin then nixpkgsDarwinRev else nixpkgsRev;
+   in builtins.trace "Using nixpkgs rev: ${rev}" rev;
+
+nixpackRev1 = builtins.trace "Using nixpack rev: ${nixpackRev}" nixpackRev;
 
 nixpkgsOrig =
   if nixpkgs != null
@@ -60,7 +64,7 @@ nixpkgsOrig =
     import
       (
         builtins.fetchTarball {
-          url = "https://github.com/NixOS/nixpkgs/archive/${commit}.tar.gz";
+          url = "https://github.com/NixOS/nixpkgs/archive/${nixpkgsRev1}.tar.gz";
         }
       ) nixpkgsOptions;
 
@@ -68,7 +72,7 @@ basepkgs =
   let
     src =
         builtins.fetchTarball {
-          url = "https://github.com/composewell/nixpack/archive/${nixpackRev}.tar.gz";
+          url = "https://github.com/composewell/nixpack/archive/${nixpackRev1}.tar.gz";
         };
   in import src;
 

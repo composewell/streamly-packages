@@ -2,14 +2,18 @@
   "nodes": {
     "basepkgs": {
       "locked": {
-        "lastModified": 1774344339,
-        "narHash": "sha256-AG31S1c545mVMoW6N6rFlo8/6Mq3F2K5EnSmazJmiUk=",
-        "path": "/w/harendra/composewell-deployments/nix-bundles/nixpack",
-        "type": "path"
+        "lastModified": 1774694658,
+        "narHash": "sha256-E4PwUiMKxH7paTq/6KCkudmJDTICOV4PdLOVxlWclwQ=",
+        "owner": "composewell",
+        "repo": "nixpack",
+        "rev": "57811ee9a97c48b5ec84909bc137eb57361651b0",
+        "type": "github"
       },
       "original": {
-        "path": "/w/harendra/composewell-deployments/nix-bundles/nixpack",
-        "type": "path"
+        "owner": "composewell",
+        "repo": "nixpack",
+        "rev": "57811ee9a97c48b5ec84909bc137eb57361651b0",
+        "type": "github"
       }
     },
     "nixpkgs": {
