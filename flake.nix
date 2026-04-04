@@ -9,8 +9,9 @@
     # Runs into error: darwin.apple_sdk_11_0 has been removed ...
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/6c9a78c09ff4d6c21d0319114873508a6ec01655"; # nixos-unstable
     #nixpkgs-darwin.url = "github:NixOS/nixpkgs/08478b816182dc3cc208210b996294411690111d"; # nixpkgs-25.05-darwin
-    # For local testing use "path:.../nixpack";
-    basepkgs.url = "github:composewell/nixpack/57811ee9a97c48b5ec84909bc137eb57361651b0";
+    # For local testing use:
+    # basepkgs.url = "path:/path/to/nixpack";
+    basepkgs.url = "github:composewell/nixpack/fc492c73877aeaa3bf9bec85d0eebc56036d53f9";
   };
 
   outputs = { self, nixpkgs, nixpkgs-darwin, basepkgs }:
