@@ -66,7 +66,7 @@ let streamly-packages = [
   ];
 
   in streamly-packages
-    ++ composewell-packages
+    #++ composewell-packages
     ++ [] # Add any other packages here
     ;
 }

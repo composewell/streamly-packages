@@ -25,7 +25,7 @@
       # Use default to utilize the cache,
       # specific compiler for reproducibility
       #compiler = "default";
-      #installHoogle = false;
-      #installDocs = false;
+      installHoogle = true;
+      installDocs = true;
     };
 }
