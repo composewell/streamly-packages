@@ -26,24 +26,29 @@ packages =
 libraries =
 with nixpkgs.haskellPackages;
 
-let streamly-packages = [
+let hackage-packages = [
+    # Core
     fusion-plugin
     streamly-core
     streamly
 
-    # dependent on streamly
+    # Compatibility
     streamly-bytestring
-    streamly-text
+    #streamly-text
     streamly-filepath
 
-    streamly-fsevents
+    # Higher level
+    # on macOS fails with heap-overflow
+    # streaming-benchmarks
     streamly-examples
+    streamly-fsevents
     streamly-process
-    streamly-coreutils
     streamly-statistics
   ];
 
-  composewell-packages = [
+  pre-release-packages = [
+    streamly-coreutils
+
     # dependent on streamly-process
     simple-rpc
     simple-rpc-generate
@@ -54,9 +59,6 @@ let streamly-packages = [
     # depends on streamly-coreutils, bench-show
     bench-report
 
-    # depends on bench-report, on macOS fails with heap-overflow
-    # streaming-benchmarks
-
     # dependent on streamly-process, streamly-coreutils, packdiff
     relcheck
 
@@ -65,8 +67,8 @@ let streamly-packages = [
     # streamly-lz4
   ];
 
-  in streamly-packages
-    ++ composewell-packages
+  in hackage-packages
+    ++ pre-release-packages
     ++ [] # Add any other packages here
     ;
 }
