@@ -34,13 +34,13 @@ let hackage-packages = [
 
     # Compatibility
     streamly-bytestring
-    #streamly-text
+    streamly-text
     streamly-filepath
 
     # Higher level
     # on macOS fails with heap-overflow
     # streaming-benchmarks
-    streamly-examples
+    #streamly-examples
     streamly-fsevents
     streamly-process
     streamly-statistics

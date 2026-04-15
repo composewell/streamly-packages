@@ -66,13 +66,13 @@ let
       };
     streamly-examples    = hackage "0.3.0"  "sha256-XQ0cgMtp6+psBhN0S5Pszm9Uzy2rRUFN95A+EM/xWHY=";
     streamly-filepath    = hackage "0.1.0"  "sha256-6bXya2KhvKtn2nBFiT+XsBrQuBKRsFKkYeZUAmsQleE=";
-    streamly-fsevents    = hackage "0.1.0"  "sha256-dMdbB+CquSiUuFBdnHl2iqtaUmnB5gnKA/8xTG8NEjc=";
+    streamly-fsevents    = hackage "0.1.1"  "0caln42s7s87f41drncaicp7924rkkbc1qwdykgcl6d1m9g8xw4i";
     # XXX Needs to be fixed for newer streamly versions
     #streamly-lz4         = hackage "0.1.2"  "sha256-zQ0cgMtp6+psBhN0S5Pszm9Uzy2rRUFN95A+EM/xWHY=";
     streamly-process     = hackage "0.4.0"  "sha256-8E2FLdBDDpX8TwJI/1OC9KLSAq77oHJC2yMwZFz7n6U=";
     streamly-statistics  = hackage "0.2.0"  "sha256-mkr7a3UOCFQqCQl+FRUruPaX4LZtuQt32MW86emnCG4=";
     # XXX Need to update bounds on hackage
-    #streamly-text        = hackage "0.1.0"  "sha256-p1gqMDVlqV1PheTzxc2qnh9RanGJLbt3IC4xnwFTlOg=";
+    streamly-text        = hackage "0.1.1"  "0lfwyxfb0i2yp0vb6js2shvzgxcbqlmx7kgshiswvv3a0yyw2jm8";
 
     # This can force packages like pandoc to be rebuilt.
     #unicode-data         = hackageProf "0.6.0" "sha256-gW1E5VFwZcUX5v1dvi3INDDqUuwCcOTjCR5+lOW3Obc==";
