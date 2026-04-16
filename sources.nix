@@ -64,7 +64,7 @@ let
       // { rev = "1";
            cabalSha256 = "1hjdwsc0yk4z5lhvaxnv5yw70qlpccfrbm2s4di53fz4g5r80xh0";
       };
-    streamly-examples    = hackage "0.3.0"  "sha256-XQ0cgMtp6+psBhN0S5Pszm9Uzy2rRUFN95A+EM/xWHY=";
+    streamly-examples    = hackage "0.3.1"  "1wyfv35b48yhwrvsbh0ffrcjkwk61ysgr82fbsxlfldh1c3iyqrd";
     streamly-filepath    = hackage "0.1.0"  "sha256-6bXya2KhvKtn2nBFiT+XsBrQuBKRsFKkYeZUAmsQleE=";
     streamly-fsevents    = hackage "0.1.1"  "0caln42s7s87f41drncaicp7924rkkbc1qwdykgcl6d1m9g8xw4i";
     # XXX Needs to be fixed for newer streamly versions

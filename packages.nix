@@ -41,7 +41,7 @@ let hackage-packages = [
     # Higher level
     # on macOS fails with heap-overflow
     # streaming-benchmarks
-    #streamly-examples
+    streamly-examples
     streamly-fsevents
     streamly-process
     streamly-statistics
