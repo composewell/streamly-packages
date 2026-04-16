@@ -9,7 +9,8 @@ packages =
       hpkgs.nixpack-editors.nvimWithConfig
       hpkgs.nixpack-editors.vim_bashrc
       hpkgs.nixpack-editors.vim_gitconfig
-      hpkgs.nixpack-editors.vscodiumWithConfig
+      # Currently broken for macOS
+      #hpkgs.nixpack-editors.vscodiumWithConfig
 
       # Haskell tools
       # From nixpkgs.pkgs
