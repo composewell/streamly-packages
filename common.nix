@@ -44,7 +44,7 @@ packOptions =
   };
 
 # https://github.com/composewell/nixpack repository revision.
-nixpackRev = "8c0e3596f53ae42c43175b7440d9c0f5c462997c";
+nixpackRev = "f50a0b2aaaab434f46847bc171240957b508b901";
 
 #------------------------------------------------------------------------------
 # Anything after this is usually not to be changed
