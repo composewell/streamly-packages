@@ -44,7 +44,7 @@ let
 
   # packages from hackage that may not be in our nixpkgs set yet or we want to
   # configure them with different options. For overriding the nixpkgs-set.
-  # Try --revision in cabal2nix flags
+  # Try --revision in cabal2nix flags and remove the "rev" attribute
   hackage-overlay = {
     bench-show =
       hackage "0.3.2" "sha256-QCn/uyhQy/4ukxNR3rt9HG2vJXer4kkGXGWl277faJk="
@@ -71,7 +71,8 @@ let
     # XXX Needs to be fixed for newer streamly versions
     #streamly-lz4         = hackage "0.1.2"  "sha256-zQ0cgMtp6+psBhN0S5Pszm9Uzy2rRUFN95A+EM/xWHY=";
     streamly-process     = hackage "0.4.1"  "0sz8bqrhkw58qcsmgl53lbna6ifxcj8nz7xwdvfwy1mqdn58094v";
-    streamly-statistics  = hackage "0.2.0"  "sha256-mkr7a3UOCFQqCQl+FRUruPaX4LZtuQt32MW86emnCG4=";
+    streamly-statistics  = hackage "0.2.0"  "0vh8lzlykg65v1vhpfbdnvh9gxmq5caiazh914m5820ffmmznjls"
+      // { c2nix = ["--revision 1"]; };
     # XXX Need to update bounds on hackage
     streamly-text        = hackage "0.1.1"  "0lfwyxfb0i2yp0vb6js2shvzgxcbqlmx7kgshiswvv3a0yyw2jm8";
 
